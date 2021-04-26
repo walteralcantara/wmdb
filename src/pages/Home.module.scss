@@ -1,0 +1,9 @@
+.homePage {
+  padding: 0 4rem;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+
+  .movies {
+    height: 2000px;
+  }
+}
