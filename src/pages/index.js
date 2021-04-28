@@ -1,17 +1,54 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-import axios from 'axios';
+
+import Link from 'next/link';
 
 import { api } from '../services/api'
 
 import styles from './Home.module.scss';
 
-export default function Home() {
+export default function Home({trendingMoviesList}) {
+
+  console.log(trendingMoviesList);
+
+  function showInfo(){
+    console.log('passou');
+  }
 
   return (
     <div className={styles.homePage}>
 
       <section className={styles.movies}>
+        <h2>Filmes da semana</h2>
+        
+        <div className={styles.gridMovies}>
+          {trendingMoviesList.map((el, index) => {
+            return(
+                            
+              <div key={el.id}>
+                  {/* <a href="movie/#" onMouseEnter={() => {
+                    console.log(el.title, index)
+                    // console.log(document.querySelector(`img[src$="${el.poster}"]`))
+                    // document.querySelector(`img[src$="${el.poster}"]`).appendChild.innerHTML = `Tst`;
+                    // document.querySelector(`img[src$="${el.poster}"]`).appendChild.innerHTML = `Tst`;
+                  }} > */}
+                    <div className={styles.image}> 
+                        <img className={styles.image__img} src={el.poster} alt={el.title}/>
+
+                        <div className={styles.image__overlay}>
+                          <div className={styles.image__title}>{el.title}</div>
+
+                          <span>Ver Detalhes</span>
+                        </div>
+                    </div>
+                    <p>{el.title}</p>
+
+                  {/* </a> */}
+              </div>
+              
+            )
+          })}
+        </div>
 
       </section>
 
@@ -34,11 +71,21 @@ export const getServerSideProps = async () => {
     }
   })
 
-  console.log(response.data.results[0]);
+  console.log(response.data.results);
+
+  const trendingMoviesList = response.data.results.map(movie => {
+    const posterURL = 'https://image.tmdb.org/t/p/w200';
+
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: `${posterURL}${movie.poster_path}`
+    }
+  })
 
   return {
     props: {
-      // list: json.results,
+      trendingMoviesList,
     }
   }
 

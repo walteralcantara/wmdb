@@ -1,5 +1,40 @@
 .asideContainer {
   background: var(--secondary-color);
   height: calc(100vh - 4rem);
-  width: 13rem;
+  width: 10rem;
+  padding: 1rem 0 0;
+
+  ul {
+    list-style-type: none;
+
+    li {
+
+      a {
+        display: inline-block;
+        width: 100%;
+        color: var(--white);
+        text-decoration: none;
+        padding: .4rem 0;
+        text-align: center;
+
+        font-size: 12px;
+
+        &:hover {
+          background-color: var(--primary-color);
+          color: var(--tertiary-color);
+
+
+          &::after {
+            content: ' <';
+            display: inline-block;
+
+          }
+        }
+      }
+
+      & + li {
+        // margin-top: .3rem;
+      }
+    }
+  }
 }
