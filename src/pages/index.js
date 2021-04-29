@@ -1,19 +1,18 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
-import Link from 'next/link';
-
 import { api } from '../services/api'
+import { formatYear } from '../utils/formatYear';
+import { formatGenre } from '../utils/formatGenre';
+
 
 import styles from './Home.module.scss';
+
 
 export default function Home({trendingMoviesList}) {
 
   console.log(trendingMoviesList);
-
-  function showInfo(){
-    console.log('passou');
-  }
 
   return (
     <div className={styles.homePage}>
@@ -25,25 +24,28 @@ export default function Home({trendingMoviesList}) {
           {trendingMoviesList.map((el, index) => {
             return(
                             
-              <div key={el.id}>
-                  {/* <a href="movie/#" onMouseEnter={() => {
-                    console.log(el.title, index)
-                    // console.log(document.querySelector(`img[src$="${el.poster}"]`))
-                    // document.querySelector(`img[src$="${el.poster}"]`).appendChild.innerHTML = `Tst`;
-                    // document.querySelector(`img[src$="${el.poster}"]`).appendChild.innerHTML = `Tst`;
-                  }} > */}
-                    <div className={styles.image}> 
+              <div key={el.id} className={styles.card__movie}>
+
+                    <div className={styles.image__movie}> 
                         <img className={styles.image__img} src={el.poster} alt={el.title}/>
 
-                        <div className={styles.image__overlay}>
-                          <div className={styles.image__title}>{el.title}</div>
+                        <figcaption className={styles.image__overlay}>
+                            <div className={styles.image__rating}>
+                              <h4>{el.rating} / 10</h4>
+                            </div>
+                            
+                            <div className={styles.image__genre}>
+                              <h4>{el.genres[0]}</h4>
+                              <h4>{el.genres[1]}</h4>                          
+                            </div>
 
-                          <span>Ver Detalhes</span>
-                        </div>
+                            <span className={styles.button__details}>Ver Detalhes</span>
+                        </figcaption>
                     </div>
-                    <p>{el.title}</p>
 
-                  {/* </a> */}
+                    <strong className={styles.movie__title}>{el.title}</strong>
+                    <p className={styles.movie__year}>{el.year}</p>
+                  
               </div>
               
             )
@@ -71,7 +73,7 @@ export const getServerSideProps = async () => {
     }
   })
 
-  console.log(response.data.results);
+  // console.log(response.data.results);
 
   const trendingMoviesList = response.data.results.map(movie => {
     const posterURL = 'https://image.tmdb.org/t/p/w200';
@@ -79,7 +81,10 @@ export const getServerSideProps = async () => {
     return {
       id: movie.id,
       title: movie.title,
-      poster: `${posterURL}${movie.poster_path}`
+      poster: `${posterURL}${movie.poster_path}`,
+      rating: movie.vote_average,
+      year: formatYear(movie.release_date),
+      genres: formatGenre(movie.genre_ids),
     }
   })
 
