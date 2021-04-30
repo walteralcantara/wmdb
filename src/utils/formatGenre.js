@@ -1,16 +1,6 @@
 export function formatGenre(genres){
     const formatGenre = []
 
-    // if(genres[0] == 14){
-    //     genres[0] = 'Fantasia';
-    // }
-
-    // const strArr = genres.map((e) => {
-    //     e.toString();
-    // })
-
-    // console.log(strArr);
-
     genres.map(genre__id => {
         if(genre__id == 28)
             formatGenre.push('Ação');
@@ -51,8 +41,5 @@ export function formatGenre(genres){
         if(genre__id == 37)
             formatGenre.push('Oeste');
     })
-
-    console.log(genres);
-    console.log(formatGenre);
     return formatGenre;
   }

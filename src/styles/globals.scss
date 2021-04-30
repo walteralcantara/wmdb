@@ -63,3 +63,25 @@ h2 {
 button {
   cursor: pointer;
 }
+
+// scrollbar
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+
+  &-track {
+  background: #000;
+  }
+
+  &-thumb {
+    background: var(--primary-color);
+    border: 4px solid #000;
+    border-radius: 15px;
+
+
+    &:hover {
+      background: #444;
+    }
+  }
+}

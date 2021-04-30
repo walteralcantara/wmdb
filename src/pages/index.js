@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+
 
 import { api } from '../services/api'
 import { formatYear } from '../utils/formatYear';
@@ -14,8 +16,56 @@ export default function Home({trendingMoviesList}) {
 
   console.log(trendingMoviesList);
 
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
   return (
     <div className={styles.homePage}>
+
+      <section>
+        <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel.Item>
+          <img
+            className="d-block w-200"
+            src={trendingMoviesList[0].backdrop}
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>{trendingMoviesList[0].title}</h3>
+            <p>{trendingMoviesList[0].description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={trendingMoviesList[1].backdrop}
+            alt="Second slide"
+          />
+
+          <Carousel.Caption>
+            <h3>{trendingMoviesList[1].title}</h3>
+            <p>{trendingMoviesList[1].description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={trendingMoviesList[2].backdrop}
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>{trendingMoviesList[2].title}</h3>
+            <p>
+            {trendingMoviesList[2].description}
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+    </section>
 
       <section className={styles.movies}>
         <h2>Filmes da semana</h2>
@@ -62,10 +112,6 @@ export default function Home({trendingMoviesList}) {
 
 export const getServerSideProps = async () => {
 
-  // const res = await fetch('https://api.themoviedb.org/3/trending/movie/week?api_key=d98980b6f729b75d3b64c9e86c4e45fa&language=pt-BR');
-
-  // const json = await res.json();
-
   const response = await api.get('trending/movie/week', {
     params : {
       api_key: 'd98980b6f729b75d3b64c9e86c4e45fa',
@@ -73,18 +119,21 @@ export const getServerSideProps = async () => {
     }
   })
 
-  // console.log(response.data.results);
+  console.log(response.data.results);
 
   const trendingMoviesList = response.data.results.map(movie => {
     const posterURL = 'https://image.tmdb.org/t/p/w200';
+    const backdropURL = 'https://image.tmdb.org/t/p/original'
 
     return {
       id: movie.id,
       title: movie.title,
       poster: `${posterURL}${movie.poster_path}`,
+      backdrop: `${backdropURL}${movie.backdrop_path}`,
       rating: movie.vote_average,
       year: formatYear(movie.release_date),
       genres: formatGenre(movie.genre_ids),
+      description: movie.overview,
     }
   })
 

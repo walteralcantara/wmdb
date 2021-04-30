@@ -4,8 +4,11 @@
   width: 10rem;
   padding: 1rem 0 0;
 
+  overflow-y: scroll;
+
   ul {
     list-style-type: none;
+    height: 800px;
 
     li {
 
@@ -22,13 +25,6 @@
         &:hover {
           background-color: var(--primary-color);
           color: var(--tertiary-color);
-
-
-          &::after {
-            content: ' <';
-            display: inline-block;
-
-          }
         }
       }
 
