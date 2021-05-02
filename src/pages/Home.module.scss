@@ -1,7 +1,36 @@
 .homePage {
-  padding: 0 4rem;
+  // padding: 0 4rem;
   height: calc(100vh - 4rem);
   overflow-y: scroll;
+
+  .carousel {
+    img {
+      height: 400px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    p {                    
+      height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    a {
+      transition: all .2s;
+      & span {
+
+        svg {
+          border: 1px solid yellow;
+        }
+      }
+      &:hover {
+        background: rgba(0,0,0,0.6);
+        
+      }
+    }
+  }
 
   .movies {
     height: 2000px;
