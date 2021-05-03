@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -17,9 +19,9 @@ export default function Header() {
     <header className={styles.headerContainer}>
 
       <div className={styles.logo}>
-        <h2>WMDB</h2>
-        <p>Walter's Movie Database</p>
+          <img src="logo.svg" />
       </div>
+        
 
       <div className={styles.searchBox}>
         <input type="text" placeholder="Pesquise filmes..." />

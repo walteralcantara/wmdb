@@ -11,7 +11,9 @@
 
   .logo {
     flex: 0.2;
-    text-align: center;
+    img {
+      height: 35px;
+    }
   }
 
   .searchBox {

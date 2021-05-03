@@ -1,5 +1,4 @@
 .homePage {
-  // padding: 0 4rem;
   height: calc(100vh - 4rem);
   overflow-y: scroll;
 
@@ -11,43 +10,39 @@
     }
 
     p {                    
-      height: 20px;
+      max-height: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    
+    a[class^="carousel-control-next"] {
+      transition: ease-in-out .7s;
 
-    a {
-      transition: all .2s;
-      & span {
-
-        svg {
-          border: 1px solid yellow;
-        }
-      }
       &:hover {
-        background: rgba(0,0,0,0.6);
-        
+        background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 100%)
+
       }
     }
+
+    a[class^="carousel-control-prev"] {
+      transition: ease-in-out .7s;
+
+      &:hover {
+        background: linear-gradient(-270deg, #000000 0%, rgba(0, 0, 0, 0) 100%)
+
+      }
+    }
+
   }
 
   .movies {
     height: 2000px;
-    padding: 1rem 0rem;
+    padding: 1rem 2rem;
 
     h2 {
-      font-weight: normal;
+      font-weight: bold;
 
-      &::after {
-        content: '';
-        display: block;
-        height: 1px;
-        width: 80%;
-        background-color: #fff;
-
-        margin-top: 5px;
-      }
     }
 
     .gridMovies {
@@ -56,7 +51,7 @@
 
       list-style-type: none;
 
-      padding: 2rem 0rem;
+      padding: 1rem 0rem;
 
 
       .card__movie {
@@ -73,6 +68,7 @@
           .image__img {
             border-radius: 5px;
             width: 100%!important;
+            box-shadow: 0 16px 32px 0 rgba(0,0,0,0.6);
           }
 
           .image__overlay {
@@ -106,7 +102,6 @@
               opacity: 1;
             }
   
-            
             .image__rating h4 {
               font-weight: bold;
               font-size: 2rem;
@@ -142,7 +137,6 @@
                 margin-top: 15px;
               }
             }
-  
           }
         }
 

@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import Carousel from 'react-bootstrap/Carousel';
 
 
@@ -70,7 +69,7 @@ export default function Home({trendingMoviesList, latestMovies}) {
                               <h4>{el.genres[1]}</h4>                          
                             </div>
 
-                            <span className={styles.button__details}>Ver Detalhes</span>
+                            <Link href={`./movie/${el.id}`}className={styles.button__details}>Ver Detalhes</Link>
                         </figcaption>
                     </div>
 
@@ -89,7 +88,7 @@ export default function Home({trendingMoviesList, latestMovies}) {
 
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 
   const response = await api.get('trending/movie/week', {
     params : {
@@ -123,7 +122,8 @@ export const getServerSideProps = async () => {
     props: {
       trendingMoviesList,
       latestMovies,
-    }
+    },
+    revalidate: 60 * 60 * 8, // 8 hours
   }
 
 }
