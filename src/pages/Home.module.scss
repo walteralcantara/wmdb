@@ -9,31 +9,28 @@
       object-fit: cover;
     }
 
-    p {                    
+    p {
       max-height: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     a[class^="carousel-control-next"] {
-      transition: ease-in-out .7s;
+      transition: ease-in-out 0.7s;
 
       &:hover {
-        background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 100%)
-
+        background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
       }
     }
 
     a[class^="carousel-control-prev"] {
-      transition: ease-in-out .7s;
+      transition: ease-in-out 0.7s;
 
       &:hover {
-        background: linear-gradient(-270deg, #000000 0%, rgba(0, 0, 0, 0) 100%)
-
+        background: linear-gradient(-270deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
       }
     }
-
   }
 
   .movies {
@@ -42,7 +39,6 @@
 
     h2 {
       font-weight: bold;
-
     }
 
     .gridMovies {
@@ -52,7 +48,6 @@
       list-style-type: none;
 
       padding: 1rem 0rem;
-
 
       .card__movie {
         width: 180px;
@@ -67,8 +62,8 @@
 
           .image__img {
             border-radius: 5px;
-            width: 100%!important;
-            box-shadow: 0 16px 32px 0 rgba(0,0,0,0.6);
+            width: 100% !important;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
           }
 
           .image__overlay {
@@ -78,48 +73,50 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
-  
+
             border-radius: 5px;
-  
+
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-  
-            transition: opacity .2s;
-  
+
+            transition: opacity 0.2s;
+
             & > * {
-              transition: transform .2s;
+              transition: transform 0.2s;
             }
-  
+
             &:hover > * {
               transform: translateY(20px);
             }
-  
+
             &:hover {
               opacity: 1;
             }
-  
+
             .image__rating h4 {
               font-weight: bold;
               font-size: 2rem;
             }
-  
-            .button__details {
+
+            a[href^="./movie/"] {
               cursor: pointer;
-  
+
+              color: var(--white);
               background: var(--tertiary-color);
               padding: 8px 16px;
               border-radius: 5px;
-  
+
               margin-top: 30px;
-  
-              transition: ease .2s;
-              
+
+              transition: ease 0.2s;
+
               &:hover {
-                filter: brightness(.9);
+                text-decoration: none;
+                filter: brightness(0.9);
                 transform: translateY(20px);
                 opacity: 1;
               }
@@ -146,12 +143,8 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-
         }
-
       }
     }
   }
 }
-
-

@@ -12,6 +12,7 @@
   .logo {
     flex: 0.2;
     img {
+      cursor: pointer;
       height: 35px;
     }
   }
@@ -19,7 +20,6 @@
   .searchBox {
     flex: 0.4;
     position: relative;
-
 
     input {
       width: 100%;
@@ -32,7 +32,7 @@
 
       &::placeholder {
         color: #444;
-        opacity: .8;
+        opacity: 0.8;
       }
 
       &:focus {
@@ -66,10 +66,9 @@
       svg {
         display: flex;
         & path {
-          fill: #000; 
+          fill: #000;
         }
       }
-      
     }
   }
 

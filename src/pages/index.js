@@ -12,22 +12,22 @@ import { formatGenre } from '../utils/formatGenre';
 import styles from './Home.module.scss';
 
 
-export default function Home({trendingMoviesList, latestMovies}) {
+export default function Home({ trendingMoviesList, latestMovies }) {
 
   // console.log(trendingMoviesList);
 
   const [index, setIndex] = useState(0);
-  
+
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   return (
-    
+
     <div className={styles.homePage}>
       <section className={styles.carousel}>
         <Carousel activeIndex={index} onSelect={handleSelect}>
-          { latestMovies.map((slideMovie, index) => {
+          {latestMovies.map((slideMovie, index) => {
             // console.log('SLIDE MOVIE:',slideMovie, index);
 
             return (
@@ -43,41 +43,41 @@ export default function Home({trendingMoviesList, latestMovies}) {
                 </Carousel.Caption>
               </Carousel.Item>
             )
-          }) }
+          })}
         </Carousel>
       </section>
 
       <section className={styles.movies}>
         <h2>Filmes da semana</h2>
-        
+
         <div className={styles.gridMovies}>
-          {trendingMoviesList.map((el, index) => {
-            return(
-                            
-              <div key={el.id} className={styles.card__movie}>
+          {trendingMoviesList.map((movie, index) => {
+            return (
 
-                    <div className={styles.image__movie}> 
-                        <img className={styles.image__img} src={el.poster} alt={el.title}/>
+              <div key={movie.id} className={styles.card__movie}>
 
-                        <figcaption className={styles.image__overlay}>
-                            <div className={styles.image__rating}>
-                              <h4>{el.rating} / 10</h4>
-                            </div>
-                            
-                            <div className={styles.image__genre}>
-                              <h4>{el.genres[0]}</h4>
-                              <h4>{el.genres[1]}</h4>                          
-                            </div>
+                <div className={styles.image__movie}>
+                  <img className={styles.image__img} src={movie.poster} alt={movie.title} />
 
-                            <Link href={`./movie/${el.id}`}className={styles.button__details}>Ver Detalhes</Link>
-                        </figcaption>
+                  <figcaption className={styles.image__overlay}>
+                    <div className={styles.image__rating}>
+                      <h4>{movie.rating} / 10</h4>
                     </div>
 
-                    <strong className={styles.movie__title}>{el.title}</strong>
-                    <p className={styles.movie__year}>{el.year}</p>
-                  
+                    <div className={styles.image__genre}>
+                      <h4>{movie.genres[0]}</h4>
+                      <h4>{movie.genres[1]}</h4>
+                    </div>
+
+                    <Link href={`./movie/${movie.id}`} className={styles.button__details}>Ver Detalhes</Link>
+                  </figcaption>
+                </div>
+
+                <strong className={styles.movie__title}>{movie.title}</strong>
+                <p className={styles.movie__year}>{movie.year}</p>
+
               </div>
-              
+
             )
           })}
         </div>
@@ -91,7 +91,7 @@ export default function Home({trendingMoviesList, latestMovies}) {
 export const getStaticProps = async () => {
 
   const response = await api.get('trending/movie/week', {
-    params : {
+    params: {
       api_key: 'd98980b6f729b75d3b64c9e86c4e45fa',
       language: 'pt-BR',
     }
@@ -100,9 +100,9 @@ export const getStaticProps = async () => {
   // console.log(response.data.results);
 
   const trendingMoviesList = response.data.results.map(movie => {
-    
-  const posterURL = 'https://image.tmdb.org/t/p/w200';
-  const backdropURL = 'https://image.tmdb.org/t/p/original'
+
+    const posterURL = 'https://image.tmdb.org/t/p/w200';
+    const backdropURL = 'https://image.tmdb.org/t/p/original'
 
     return {
       id: movie.id,

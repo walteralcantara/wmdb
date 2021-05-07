@@ -1,0 +1,68 @@
+.moviePageContainer {
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+
+    .background {
+        img {
+            height: 70vh;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .moviePageDetails {
+        padding: 1rem 2rem;
+        margin-top: -6rem;
+
+        display: flex;
+
+        .moviePoster {
+            img {
+                border-radius: 5px;
+                width: 280px;
+            }
+        }
+
+        .movieSubInfo {
+            max-width: 70%;
+            margin-top: 6rem;
+
+            padding: 0rem 1rem;
+
+            h2 {
+            }
+
+            div {
+                display: flex;
+
+                span {
+                    margin-right: 15px;
+                }
+            }
+
+            p {
+                margin-top: 15px;
+            }
+
+            .genresList {
+                span {
+                    &:after {
+                        content: ",";
+                        display: inline-block;
+                    }
+
+                    &:last-child {
+                        &:after {
+                            content: ".";
+                            display: inline-block;
+                        }
+                    }
+
+                    & + span {
+                        margin-left: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
