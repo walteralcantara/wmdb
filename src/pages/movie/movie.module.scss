@@ -37,6 +37,18 @@
 
                 span {
                     margin-right: 15px;
+
+                    &:first-child {
+                        display: flex;
+                        align-items: center;
+                        svg {
+                            width: 70px;
+                            margin-right: 5px;
+                        }
+                        svg path {
+                            fill: #2dbbcf;
+                        }
+                    }
                 }
             }
 

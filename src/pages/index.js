@@ -14,8 +14,6 @@ import styles from './Home.module.scss';
 
 export default function Home({ trendingMoviesList, latestMovies }) {
 
-  // console.log(trendingMoviesList);
-
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -28,7 +26,6 @@ export default function Home({ trendingMoviesList, latestMovies }) {
       <section className={styles.carousel}>
         <Carousel activeIndex={index} onSelect={handleSelect}>
           {latestMovies.map((slideMovie, index) => {
-            // console.log('SLIDE MOVIE:',slideMovie, index);
 
             return (
               <Carousel.Item key={slideMovie.id}>
@@ -96,8 +93,6 @@ export const getStaticProps = async () => {
       language: 'pt-BR',
     }
   })
-
-  // console.log(response.data.results);
 
   const trendingMoviesList = response.data.results.map(movie => {
 
