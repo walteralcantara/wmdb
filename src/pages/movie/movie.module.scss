@@ -75,6 +75,46 @@
                     }
                 }
             }
+
+            .movieSubCast {
+                display: flex;
+
+                justify-content: center;
+                text-align: center;
+                flex-wrap: wrap;
+
+                strong:first-child {
+                    display: block;
+                }
+
+                div {
+                    display: block;
+                    flex: 1;
+
+                    img {
+                        min-width: 80px;
+                        height: 80px;
+
+                        object-fit: cover;
+                        border-radius: 50%;
+                        margin: 0 auto;
+                    }
+
+                    & + div {
+                        margin-left: 1rem;
+                    }
+
+                    strong {
+                        display: inline-block;
+                    }
+
+                    span {
+                        display: block;
+                        font-weight: normal;
+                        word-break: break-all;
+                    }
+                }
+            }
         }
     }
 }

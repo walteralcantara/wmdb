@@ -3,15 +3,16 @@ import Link from 'next/link';
 
 import { api } from '../../services/api';
 import { formatYear } from '../../utils/formatYear'
-import { formatToHoursAndMinutes } from '../../utils/formatHours';
+import { formatToHoursAndMinutes } from '../../utils/formatToHoursAndMinutes';
 
 import styles from '../movie/movie.module.scss';
 
-export default function MovieItem({ responseData, movieInfo, movieCast }) {
+export default function MovieItem({ movieInfo, movieCast }) {
 
-  console.log('RESPONSEDATA:', responseData)
-  console.log('INFO:', movieInfo)
-  console.log('GENRE:', movieInfo.genres)
+  // console.log('RESPONSEDATA:', responseData)
+  // console.log('INFO:', movieInfo)
+  // console.log('GENRE:', movieInfo.genres)
+  // console.log('CAST:', movieCast)
   console.log('CAST:', movieCast)
 
 
@@ -46,16 +47,37 @@ export default function MovieItem({ responseData, movieInfo, movieCast }) {
 
           <p>{movieInfo.description}</p>
 
-          <p className={styles.genresList}><strong>Gêneros:</strong> {movieInfo.genres.map((genre) => {
-            return (
-              <span>{genre.name}</span>
-            )
-          })}</p>
+          <p className={styles.genresList}><strong>Gêneros: </strong>
+            {movieInfo.genres.map((genre) => {
+              return (
+                <span>{genre.name}</span>
+              )
+            })}</p>
+
+          <div className={styles.movieSubCast}>
+            <strong>Elenco:</strong>
+            {movieCast.cast.map(actor => {
+              return (
+                <div>
+                  <img src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} />
+                  <strong>{actor.name}</strong>
+                  <span>{actor.character}</span>
+                </div>
+              )
+            })}
+            <div>
+              {<img src={`https://image.tmdb.org/t/p/w500/${movieCast.director.profile_path}`} />}
+              <strong>{movieCast.director.name}</strong>
+              <span>Diretor</span>
+            </div>
+          </div>
+
+
         </div>
       </div>
-      <div className={styles.movieSubCast}>
 
-      </div>
+
+
     </div >
   );
 }
@@ -82,7 +104,7 @@ export async function getServerSideProps(ctx) {
   const posterURL = 'https://image.tmdb.org/t/p/w500';
   const backdropURL = 'https://image.tmdb.org/t/p/original'
 
-  console.log(responseCredits);
+  // console.log(responseCredits);
 
   const movieInfo = {
     id: response.data.id,
@@ -96,13 +118,26 @@ export async function getServerSideProps(ctx) {
     runtime: formatToHoursAndMinutes(response.data.runtime),
   }
 
+  let lastFive = responseCredits.data.cast.slice(0, 5);
+  let director = responseCredits.data.crew.find(el => el.department === 'Directing');
+
+  console.log(director);
+
+  const movieCast = {
+    id: responseCredits.data.id,
+    cast: lastFive,
+    director: director,
+    // character: responseCredits.data.cast.character,
+    // profile: responseCredits.data.cast.profile_path,
+  }
+
   const responseData = response.data;
 
   return {
     props: {
       responseData: responseData,
       movieInfo: movieInfo,
-      movieCast: responseCredits.data,
+      movieCast: movieCast,
     },
   };
 }
