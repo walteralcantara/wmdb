@@ -26,7 +26,7 @@ $ yarn
 # Start the project
 $ yarn dev
 ```
-Or you just can go to [My WMDB Deployed](https://walteralcantara-links.vercel.app)
+Or you just can go to [My WMDB Deployed](https://wmdb.vercel.app)
 
 ## 🧪 Technologies
 
