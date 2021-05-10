@@ -8,12 +8,12 @@ import styles from '../styles/app.module.scss';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Header />  
+      <Header />
       <div className={styles.wrapper}>
+        <main>
           <AsideMenu />
-          <main>
-            <Component {...pageProps} />
-          </main>
+          <Component {...pageProps} />
+        </main>
       </div>
     </>
   )
