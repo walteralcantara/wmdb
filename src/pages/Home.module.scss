@@ -4,9 +4,13 @@
 
   .carousel {
     img {
-      height: 400px;
+      height: 75vh;
       width: 100%;
       object-fit: cover;
+      cursor: pointer;
+    }
+
+    [class^="carousel-caption"] {
     }
 
     p {
@@ -39,6 +43,15 @@
 
     h2 {
       font-weight: bold;
+
+      &:after {
+        content: "";
+        display: block;
+        background: var(--white);
+        height: 1px;
+        width: 100%;
+        margin: 10px 0;
+      }
     }
 
     .gridMovies {
@@ -51,6 +64,7 @@
 
       .card__movie {
         width: 180px;
+        cursor: pointer;
 
         & + .card__movie {
           margin-bottom: 2rem;
@@ -102,7 +116,7 @@
               font-size: 2rem;
             }
 
-            a[href^="./movie/"] {
+            .button__details {
               cursor: pointer;
 
               color: var(--white);
