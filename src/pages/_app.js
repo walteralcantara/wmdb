@@ -1,4 +1,5 @@
 import '../styles/globals.scss'
+import '../styles/slick.scss';
 
 import AsideMenu from '../components/AsideMenu';
 import Header from '../components/Header';
