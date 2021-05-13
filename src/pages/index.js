@@ -18,6 +18,14 @@ export default function Home({ trendingMoviesList, slideMoviesList }) {
     setIndex(selectedIndex);
   };
 
+  const settingsCarousel = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   const settings = {
     dots: false,
     infinite: true,
@@ -29,35 +37,31 @@ export default function Home({ trendingMoviesList, slideMoviesList }) {
   return (
 
     <div className={styles.homePage}>
+
       <section className={styles.carousel}>
-        <Carousel activeIndex={index} onSelect={handleSelect}>
-          {slideMoviesList.map((slideMovie, index) => {
-
+        <Slider {...settingsCarousel}>
+          {slideMoviesList.map((slideMovie) => {
             return (
-              <Carousel.Item key={slideMovie.id}>
-                <Link href={`movie/${slideMovie.id}`}>
-                  <img
-                    src={slideMovie.backdrop}
-                    alt={slideMovie.title}
-                  />
+              <>
+                <Link href={`/movie/${slideMovie.id}`}>
+                  <div key={slideMovie.id}>
+                    <img src={slideMovie.backdrop} />
+                  </div>
                 </Link>
-
-                <Carousel.Caption>
+                <div className={styles.caption}>
                   <h3>{slideMovie.title}</h3>
                   <p>{slideMovie.description}</p>
-                </Carousel.Caption>
-              </Carousel.Item>
+                </div>
+              </>
             )
           })}
-        </Carousel>
+        </Slider>
       </section>
 
       <section className={styles.movies}>
         <h2>Filmes da semana</h2>
 
         <div className={styles.gridMovies}>
-
-
 
           <div className={styles.innerMovies}>
             <Slider {...settings}>
