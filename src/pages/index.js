@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 import Slider from "react-slick";
 
 import { api } from '../services/api'
@@ -9,14 +8,13 @@ import { formatGenre } from '../utils/formatGenre';
 
 
 import styles from './Home.module.scss';
+import MovieShelf from '../components/MovieShelf';
 
-export default function Home({ trendingMoviesList, slideMoviesList }) {
+export default function Home({ slideMoviesList, trendingMoviesList, popularMoviesList, topRatedMoviesList, nowplayingMoviesList }) {
 
-  const [index, setIndex] = useState(0);
+  console.log('TRENDING:',trendingMoviesList);
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+  console.log('POPULAR:',popularMoviesList);
 
   const settingsCarousel = {
     dots: true,
@@ -26,19 +24,13 @@ export default function Home({ trendingMoviesList, slideMoviesList }) {
     slidesToScroll: 1
   };
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 4
-  };
 
   return (
 
     <div className={styles.homePage}>
 
       <section className={styles.carousel}>
+
         <Slider {...settingsCarousel}>
           {slideMoviesList.map((slideMovie) => {
             return (
@@ -58,48 +50,19 @@ export default function Home({ trendingMoviesList, slideMoviesList }) {
         </Slider>
       </section>
 
-      <section className={styles.movies}>
-        <h2>Filmes da semana</h2>
+      <section className={styles.moviesList}>
 
-        <div className={styles.gridMovies}>
+        <h2>Em cartaz</h2>
+        <MovieShelf element={nowplayingMoviesList} />
 
-          <div className={styles.innerMovies}>
-            <Slider {...settings}>
-              {trendingMoviesList.map((movie, index) => {
-                return (
-                  <Link href={`./movie/${movie.id}`}>
-                    <div key={movie.id} className={styles.card__movie}>
+        <h2>Filmes do dia</h2>
+        <MovieShelf element={trendingMoviesList} />
+        
+        <h2>Populares</h2>
+        <MovieShelf element={popularMoviesList} />
 
-                      <div className={styles.image__movie}>
-                        <img className={styles.image__img} src={movie.poster} alt={movie.title} />
-
-                        <figcaption className={styles.image__overlay}>
-                          <div className={styles.image__rating}>
-                            <h4>{movie.rating} / 10</h4>
-                          </div>
-
-                          <div className={styles.image__genre}>
-                            <h4>{movie.genres[0]}</h4>
-                            <h4>{movie.genres[1]}</h4>
-                          </div>
-
-
-                          <span className={styles.button__details}>
-                            Ver Detalhes
-                          </span>
-
-                        </figcaption>
-                      </div>
-                      <strong className={styles.movie__title}>{movie.title}</strong>
-                      <p className={styles.movie__year}>{movie.year}</p>
-                    </div>
-                  </Link>
-                )
-              })}
-            </Slider>
-          </div>
-
-        </div>
+        <h2>Mais votados</h2>
+        <MovieShelf element={topRatedMoviesList} />
 
       </section>
     </div>
@@ -109,18 +72,25 @@ export default function Home({ trendingMoviesList, slideMoviesList }) {
 
 export const getStaticProps = async () => {
 
-  const response = await api.get('trending/movie/week', {
+  const posterURL = 'https://image.tmdb.org/t/p/w200';
+  const backdropURL = 'https://image.tmdb.org/t/p/original'
+
+  const trending = await api.get('trending/movie/day');
+  const popular = await api.get('movie/popular');
+  const toprated = await api.get('movie/top_rated');
+  const nowplaying = await api.get('/movie/now_playing', {
     params: {
-      api_key: 'd98980b6f729b75d3b64c9e86c4e45fa',
-      language: 'pt-BR',
+      region: 'BR'
     }
-  })
+  });
 
-  const trendingMoviesList = response.data.results.map(movie => {
 
-    const posterURL = 'https://image.tmdb.org/t/p/w200';
-    const backdropURL = 'https://image.tmdb.org/t/p/original'
 
+  
+
+  console.log('@@@POPULAR@@@:',popular)
+
+  const trendingMoviesList = trending.data.results.map(movie => {
     return {
       id: movie.id,
       title: movie.title,
@@ -133,11 +103,7 @@ export const getStaticProps = async () => {
     }
   })
 
-  const slideMoviesList = response.data.results.map(movie => {
-
-    const posterURL = 'https://image.tmdb.org/t/p/w200';
-    const backdropURL = 'https://image.tmdb.org/t/p/original'
-
+  const slideMoviesList = trending.data.results.map(movie => {
     return {
       id: movie.id,
       title: movie.title,
@@ -150,11 +116,54 @@ export const getStaticProps = async () => {
     }
   }).slice(0, 8);
 
+  const popularMoviesList = popular.data.results.map(movie => {
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: `${posterURL}${movie.poster_path}`,
+      backdrop: `${backdropURL}${movie.backdrop_path}`,
+      rating: movie.vote_average,
+      year: formatYear(movie.release_date),
+      genres: formatGenre(movie.genre_ids),
+      description: movie.overview,
+    }
+  })
+ 
+  const topRatedMoviesList = toprated.data.results.map(movie => {
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: `${posterURL}${movie.poster_path}`,
+      backdrop: `${backdropURL}${movie.backdrop_path}`,
+      rating: movie.vote_average,
+      year: formatYear(movie.release_date),
+      genres: formatGenre(movie.genre_ids),
+      description: movie.overview,
+    }
+  })
+
+  const nowplayingMoviesList = nowplaying.data.results.map(movie => {
+    return {
+      id: movie.id,
+      title: movie.title,
+      poster: `${posterURL}${movie.poster_path}`,
+      backdrop: `${backdropURL}${movie.backdrop_path}`,
+      rating: movie.vote_average,
+      year: formatYear(movie.release_date),
+      genres: formatGenre(movie.genre_ids),
+      description: movie.overview,
+    }
+  })
+
   return {
     props: {
       trendingMoviesList,
       slideMoviesList,
+      popularMoviesList,
+      topRatedMoviesList,
+      nowplayingMoviesList,
     },
+
     revalidate: 60 * 60 * 8, // 8 hours
   }
 

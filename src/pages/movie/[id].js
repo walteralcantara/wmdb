@@ -7,20 +7,13 @@ import { formatToHoursAndMinutes } from '../../utils/formatToHoursAndMinutes';
 
 import styles from '../movie/movie.module.scss';
 import { formatGenre } from '../../utils/formatGenre';
+import MovieShelf from '../../components/MovieShelf';
 
 export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
 
-  console.log('SIMILAR:', similarMovies)
-
-  // console.log('RESPONSEDATA:', responseData)
-  // console.log('INFO:', movieInfo)
-  // console.log('GENRE:', movieInfo.genres)
-  // console.log('CAST:', movieCast)
-  // console.log('CAST:', movieCast)
-
-
   return (
     <div className={styles.moviePageContainer}>
+
 
       <div className={styles.background}>
         <img src={movieInfo.backdrop} />
@@ -45,7 +38,6 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
             <span>{movieInfo.runtime}</span>
             <span>{movieInfo.year}</span>
           </div>
-
 
           <p>{movieInfo.description}</p>
 
@@ -72,47 +64,17 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
               <strong>{movieCast.director.name}</strong>
               <span>Diretor</span>
             </div>
-          </div>
-
+          </div>          
 
         </div>
+      
       </div>
 
       <div className={styles.similarMovies}>
+        
         <h2>Filmes similares</h2>
-        <div>
-          {similarMovies.map(movie => {
-            return (
-              <Link href={`./${movie.id}`}>
-                <div key={movie.id} className={styles.card__movie}>
+        <MovieShelf element={similarMovies} />
 
-                  <div className={styles.image__movie}>
-                    <img className={styles.image__img} src={movie.poster} alt={movie.title} />
-
-                    <figcaption className={styles.image__overlay}>
-                      <div className={styles.image__rating}>
-                        <h4>{movie.rating} / 10</h4>
-                      </div>
-
-                      <div className={styles.image__genre}>
-                        <h4>{movie.genres[0]}</h4>
-                        <h4>{movie.genres[1]}</h4>
-                      </div>
-
-                      <span className={styles.button__details}>
-                        Ver Detalhes
-                      </span>
-                    </figcaption>
-                  </div>
-
-                  <strong className={styles.movie__title}>{movie.title}</strong>
-                  <p className={styles.movie__year}>{movie.year}</p>
-
-                </div>
-              </Link>
-            )
-          })}
-        </div>
       </div>
 
     </div >
@@ -153,7 +115,7 @@ export async function getStaticProps(ctx) {
     }
   })
 
-  console.log('RESPONSE SIMILAR MOVIE:', responseSimilar.data.results)
+  // console.log('RESPONSE SIMILAR MOVIE:', responseSimilar.data.results)
 
 
   const posterURL = 'https://image.tmdb.org/t/p/w500';
@@ -182,6 +144,8 @@ export async function getStaticProps(ctx) {
 
 
   const similarMovies = responseSimilar.data.results.map(similarMovie => {
+    const posterURL = 'https://image.tmdb.org/t/p/w500';
+    const backdropURL = 'https://image.tmdb.org/t/p/original'
 
     return {
       id: similarMovie.id,
@@ -191,7 +155,7 @@ export async function getStaticProps(ctx) {
       title: similarMovie.title,
       rating: similarMovie.vote_average,
     }
-  }).slice(0, 5);
+  })
 
   const responseData = response.data;
   const responseSimilarData = responseSimilar.data.results;
