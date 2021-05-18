@@ -1,6 +1,9 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Slider from "react-slick";
+
+import { ContextAPI } from '../context/ContextAPI';
+
 
 import { api } from '../services/api'
 import { formatYear } from '../utils/formatYear';
@@ -12,9 +15,9 @@ import MovieShelf from '../components/MovieShelf';
 
 export default function Home({ slideMoviesList, trendingMoviesList, popularMoviesList, topRatedMoviesList, nowplayingMoviesList }) {
 
-  console.log('TRENDING:',trendingMoviesList);
+  const { movieList } = useContext(ContextAPI)
 
-  console.log('POPULAR:',popularMoviesList);
+  console.log('HOME:',movieList)
 
   const settingsCarousel = {
     dots: true,
@@ -24,10 +27,17 @@ export default function Home({ slideMoviesList, trendingMoviesList, popularMovie
     slidesToScroll: 1
   };
 
-
   return (
 
     <div className={styles.homePage}>
+
+      ()<section>
+        {movieList.results?.map(movie => {
+          return (
+            movie.title
+          )
+        })}
+      </section>
 
       <section className={styles.carousel}>
 
@@ -49,7 +59,7 @@ export default function Home({ slideMoviesList, trendingMoviesList, popularMovie
           })}
         </Slider>
       </section>
-
+      
       <section className={styles.moviesList}>
 
         <h2>Em cartaz</h2>
@@ -65,6 +75,9 @@ export default function Home({ slideMoviesList, trendingMoviesList, popularMovie
         <MovieShelf element={topRatedMoviesList} />
 
       </section>
+      
+      
+
     </div>
   );
 
@@ -83,12 +96,6 @@ export const getStaticProps = async () => {
       region: 'BR'
     }
   });
-
-
-
-  
-
-  console.log('@@@POPULAR@@@:',popular)
 
   const trendingMoviesList = trending.data.results.map(movie => {
     return {

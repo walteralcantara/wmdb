@@ -13,8 +13,6 @@ export default function MovieShelf(movieShelf) {
     slidesToScroll: 4
   };
 
-  console.log('MOVIE COMPONENT:', movieShelf.element)
-
   return (
     <div className={styles.innerMovies}>
       
@@ -52,6 +50,5 @@ export default function MovieShelf(movieShelf) {
       })}
     </Slider>
   </div>
-    // <h1>Shelf</h1>
   );
 }
