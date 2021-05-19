@@ -11,19 +11,17 @@ import { ContextAPI } from '../../context/ContextAPI';
 
 export default function Header({ list }) {
 
-  const {searchText, setSearchText, handleSearch} = useContext(ContextAPI)
+  const {searchText, setSearchText, handleSearch, setIsSearched} = useContext(ContextAPI)
 
 
   const currentDate = format(new Date(), 'EEEEEE, dd MMMM', {
     locale: ptBR,
   }).toString()
 
-  console.log(searchText)
-
   return (
     <header className={styles.headerContainer}>
 
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={() => setIsSearched(false)}>
         <Link href="/">
           <svg viewBox="0 0 980 185" fill="none">
             <path d="M60.5 184.5L0 0.5V184.5H60.5Z" fill="white" />

@@ -31,7 +31,7 @@ export default function MovieShelf(movieShelf) {
                   </div>
 
                   <div className={styles.image__genre}>
-                    <h4>{movie.genres[0]}</h4>
+                    <h4>{movie.genres[0]} </h4>
                     <h4>{movie.genres[1]}</h4>
                   </div>
 
