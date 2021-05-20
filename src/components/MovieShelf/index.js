@@ -35,7 +35,6 @@ export default function MovieShelf(movieShelf) {
                     <h4>{movie.genres[1]}</h4>
                   </div>
 
-
                   <span className={styles.button__details}>
                     Ver Detalhes
                   </span>

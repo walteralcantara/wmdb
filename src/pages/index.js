@@ -18,9 +18,7 @@ export default function Home({
   topRatedMoviesList,
   nowplayingMoviesList,
 }) {
-  const { movieList, isSearched } = useContext(ContextAPI);
-
-  console.log("HOME:", movieList);
+  const { searchedMoviesList, isSearched } = useContext(ContextAPI);
 
   const settingsCarousel = {
     dots: true,
@@ -31,15 +29,39 @@ export default function Home({
   };
 
   return (
+
     <div className={styles.homePage}>
-      {isSearched && movieList ? (
-        <section className={styles.moviesList}>
-          {movieList.map((movie) => {
+      {isSearched && searchedMoviesList ? (
+        <section className={styles.searchedMoviesList}>
+          {searchedMoviesList.map((movie) => {
             return (
-              <div>
-                <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}/>
-                <p>{movie.title}</p>
+              <Link href={`./movie/${movie.id}`}>
+            <div key={movie.id} className={styles.card__movie}>
+
+              <div className={styles.image__movie}>
+                <img className={styles.image__img} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+
+                <figcaption className={styles.image__overlay}>
+                  <div className={styles.image__rating}>
+                    <h4>{movie.rating} / 10</h4>
+                  </div>
+
+                  <div className={styles.image__genre}>
+                    <h4>{movie.genre_ids[0]} </h4>
+                    <h4>{movie.genre_ids[1]}</h4>
+                  </div>
+
+
+                  <span className={styles.button__details}>
+                    Ver Detalhes
+                  </span>
+
+                </figcaption>
               </div>
+              <strong className={styles.movie__title}>{movie.title}</strong>
+              <p className={styles.movie__year}>{movie.year}</p>
+            </div>
+          </Link>
             );
           })}
         </section>
@@ -176,3 +198,4 @@ export const getStaticProps = async () => {
     revalidate: 60 * 60 * 8, // 8 hours
   };
 };
+

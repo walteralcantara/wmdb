@@ -9,13 +9,13 @@ export function ContextAPIProvider(props) {
 
   const [searchText, setSearchText] = useState('');
   const [isSearched, setIsSearched] = useState(false);
-  const [movieList, setMovieList] = useState([]);
+  const [searchedMoviesList, setSearchedMovieList] = useState([]);
 
   const handleSearch = async () => {
     if (searchText !== '') {      
       const response = await api.get(`/search/movie?query=${searchText}`);
       
-      setMovieList(response.data.results)
+      setSearchedMovieList(response.data.results)
       setIsSearched(true);
       // console.log('contextMovieList:', movieList);
     }
@@ -23,7 +23,7 @@ export function ContextAPIProvider(props) {
  
   return (
   <ContextAPI.Provider 
-    value={{searchText, setSearchText, handleSearch, movieList, isSearched, setIsSearched}}>
+    value={{searchText, setSearchText, handleSearch, searchedMoviesList, isSearched, setIsSearched}}>
 
     {props.children}
   </ContextAPI.Provider>
