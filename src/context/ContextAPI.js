@@ -1,5 +1,7 @@
 import {createContext, useState, ReactNode, useContext} from 'react';
 import { api } from '../services/api';
+import { formatGenre } from '../utils/formatGenre';
+import { formatYear } from '../utils/formatYear';
 
 
 
@@ -15,9 +17,23 @@ export function ContextAPIProvider(props) {
     if (searchText !== '') {      
       const response = await api.get(`/search/movie?query=${searchText}`);
       
-      setSearchedMovieList(response.data.results)
+      setSearchedMovieList(response.data.results.map((movie) => {
+        const posterURL = "https://image.tmdb.org/t/p/w200";
+        const backdropURL = "https://image.tmdb.org/t/p/original";
+
+        return {
+          id: movie.id,
+          title: movie.title,
+          poster: `${posterURL}${movie.poster_path}`,
+          backdrop: `${backdropURL}${movie.backdrop_path}`,
+          rating: movie.vote_average,
+          year: formatYear(movie.release_date),
+          genres: formatGenre(movie.genre_ids),
+          description: movie.overview,
+        }
+      }))
+
       setIsSearched(true);
-      // console.log('contextMovieList:', movieList);
     }
   }
  

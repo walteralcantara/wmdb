@@ -77,11 +77,18 @@
       }
 
       .movieSubCast {
-        display: flex;
+        
+        margin-top: 20px;
 
+        .gridCast {
+          display: grid;
+        grid-template-columns: repeat(6,1fr);
+        gap: 5px;
         justify-content: center;
         text-align: center;
         flex-wrap: wrap;
+
+        }
 
         strong:first-child {
           display: block;
@@ -100,18 +107,14 @@
             margin: 0 auto;
           }
 
-          & + div {
-            margin-left: 1rem;
-          }
-
           strong {
             display: inline-block;
           }
 
           span {
+            margin: 0;
             display: block;
             font-weight: normal;
-            word-break: break-all;
           }
         }
       }

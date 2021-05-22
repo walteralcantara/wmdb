@@ -41,7 +41,8 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
 
           <p>{movieInfo.description}</p>
 
-          <p className={styles.genresList}><strong>Gêneros: </strong>
+          <p className={styles.genresList}>
+            <strong>Gêneros: </strong>
             {movieInfo.genres.map((genre) => {
               return (
                 <span key={genre.name}>{genre.name}</span>
@@ -50,19 +51,21 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
 
           <div className={styles.movieSubCast}>
             <strong>Elenco:</strong>
-            {movieCast.cast.map(actor => {
-              return (
-                <div>
-                  <img src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} />
-                  <strong>{actor.name}</strong>
-                  <span>{actor.character}</span>
-                </div>
-              )
-            })}
-            <div>
-              {<img src={`https://image.tmdb.org/t/p/w500/${movieCast.director.profile_path}`} />}
-              <strong>{movieCast.director.name}</strong>
-              <span>Diretor</span>
+            <div className={styles.gridCast}>
+              {movieCast.cast.map(actor => {
+                return (
+                  <div>
+                    <img src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} />
+                    <strong>{actor.name}</strong>
+                    <span>{actor.character}</span>
+                  </div>
+                )
+              })}
+              <div>
+                {<img src={`https://image.tmdb.org/t/p/w500/${movieCast.director.profile_path}`} />}
+                <strong>{movieCast.director.name}</strong>
+                <span>Diretor</span>
+              </div>
             </div>
           </div>          
 
@@ -115,9 +118,6 @@ export async function getStaticProps(ctx) {
     }
   })
 
-  // console.log('RESPONSE SIMILAR MOVIE:', responseSimilar.data.results)
-
-
   const posterURL = 'https://image.tmdb.org/t/p/w500';
   const backdropURL = 'https://image.tmdb.org/t/p/original'
 
@@ -133,7 +133,7 @@ export async function getStaticProps(ctx) {
     runtime: formatToHoursAndMinutes(response.data.runtime),
   }
 
-  let lastFive = responseCredits.data.cast.slice(0, 5);
+  let lastFive = responseCredits.data.cast.slice(0, 6);
   let director = responseCredits.data.crew.find(el => el.department === 'Directing');
 
   const movieCast = {

@@ -27,7 +27,6 @@ export default function AsideMenu() {
 
   function handleMenu() {
     setIsOpenMenu(!isOpenMenu);
-    console.log(isOpenMenu)
   }
 
   return (

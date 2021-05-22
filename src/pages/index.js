@@ -20,6 +20,8 @@ export default function Home({
 }) {
   const { searchedMoviesList, isSearched } = useContext(ContextAPI);
 
+  console.log(searchedMoviesList)
+
   const settingsCarousel = {
     dots: true,
     infinite: true,
@@ -33,13 +35,13 @@ export default function Home({
     <div className={styles.homePage}>
       {isSearched && searchedMoviesList ? (
         <section className={styles.searchedMoviesList}>
-          {searchedMoviesList.map((movie) => {
-            return (
-              <Link href={`./movie/${movie.id}`}>
+          {searchedMoviesList.map((movie, index) => {
+        return (
+          <Link href={`./movie/${movie.id}`}>
             <div key={movie.id} className={styles.card__movie}>
 
               <div className={styles.image__movie}>
-                <img className={styles.image__img} src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                <img className={styles.image__img} src={movie.poster} alt={movie.title} />
 
                 <figcaption className={styles.image__overlay}>
                   <div className={styles.image__rating}>
@@ -47,10 +49,9 @@ export default function Home({
                   </div>
 
                   <div className={styles.image__genre}>
-                    <h4>{movie.genre_ids[0]} </h4>
-                    <h4>{movie.genre_ids[1]}</h4>
+                    <h4>{movie.genres[0]} </h4>
+                    <h4>{movie.genres[1]}</h4>
                   </div>
-
 
                   <span className={styles.button__details}>
                     Ver Detalhes
@@ -62,8 +63,8 @@ export default function Home({
               <p className={styles.movie__year}>{movie.year}</p>
             </div>
           </Link>
-            );
-          })}
+        )
+      })}
         </section>
       ) : (
         <>
@@ -106,7 +107,8 @@ export default function Home({
   );
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
+
   const posterURL = "https://image.tmdb.org/t/p/w200";
   const backdropURL = "https://image.tmdb.org/t/p/original";
 
@@ -187,6 +189,7 @@ export const getStaticProps = async () => {
   });
 
   return {
+
     props: {
       trendingMoviesList,
       slideMoviesList,
@@ -195,7 +198,7 @@ export const getStaticProps = async () => {
       nowplayingMoviesList,
     },
 
-    revalidate: 60 * 60 * 8, // 8 hours
+    // revalidate: 60 * 60 * 8, // 8 hours
   };
 };
 
