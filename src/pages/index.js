@@ -73,7 +73,7 @@ export default function Home({
               {slideMoviesList.map((slideMovie) => {
                 return (
                   <>
-                    <Link href={`/movie/${slideMovie.id}`}>
+                    <Link href={`/movie/${slideMovie.id}`} key={slideMovie.id}>
                       <div key={slideMovie.id}>
                         <img src={slideMovie.backdrop} />
                       </div>

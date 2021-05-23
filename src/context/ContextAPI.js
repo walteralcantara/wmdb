@@ -11,7 +11,9 @@ export function ContextAPIProvider(props) {
 
   const [searchText, setSearchText] = useState('');
   const [isSearched, setIsSearched] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchedMoviesList, setSearchedMovieList] = useState([]);
+  
 
   const handleSearch = async () => {
     if (searchText !== '') {      
@@ -39,7 +41,16 @@ export function ContextAPIProvider(props) {
  
   return (
   <ContextAPI.Provider 
-    value={{searchText, setSearchText, handleSearch, searchedMoviesList, isSearched, setIsSearched}}>
+    value={{
+      searchText,
+      setSearchText,
+      handleSearch,
+      searchedMoviesList,
+      isSearched,
+      setIsSearched,
+      isModalOpen,
+      setIsModalOpen,
+    }}>
 
     {props.children}
   </ContextAPI.Provider>

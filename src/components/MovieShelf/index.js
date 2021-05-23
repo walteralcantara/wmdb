@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Slider from "react-slick";
 
+import { useEffect, useState } from 'react'
+
 import styles from './MovieShelf.module.scss';
 
 export default function MovieShelf(movieShelf) {
@@ -13,14 +15,22 @@ export default function MovieShelf(movieShelf) {
     slidesToScroll: 4
   };
 
+  const [isPath, isSetPath] = useState(null);
+  
+  useEffect(() => {
+    isSetPath(window.location.pathname);
+    
+    console.log('isPath:',isPath)
+  }, [])
+
   return (
     <div className={styles.innerMovies}>
       
     <Slider {...settings}>
       {movieShelf.element.map((movie, index) => {
         return (
-          <Link href={`./movie/${movie.id}`}>
-            <div key={movie.id} className={styles.card__movie}>
+          <Link href={isPath == '/' ? `./movie/${movie.id}` : `./${movie.id}`} key={movie.id}>
+            <div className={styles.card__movie}>
 
               <div className={styles.image__movie}>
                 <img className={styles.image__img} src={movie.poster} alt={movie.title} />

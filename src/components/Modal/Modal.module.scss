@@ -1,0 +1,78 @@
+.modalContainer {
+    display: none;
+    opacity: 0;
+    transition: .3s ease;
+
+    border-radius: 5px;
+    background: var(--primary-color);
+
+    position: absolute;
+    z-index: 999;
+
+
+    top: 6rem;
+    left: 0;
+    right: 0;
+    margin-left: auto; 
+    margin-right: auto;
+
+    height: 80vh;
+    width: 70%;
+
+    .modal__header {
+        border-radius: inherit;
+        background: var(--secondary-color);
+        padding: 5px 25px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .modal__title, .modal__close {
+        font-size: 1rem;
+        color: var(--white);
+        font-weight: bold;
+    }
+
+    .modal__close {
+        cursor: pointer;
+        
+        background: var(--tertiary-color);
+        
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            width: 15px;
+
+            & polygon {
+                fill: var(--white);
+            }
+        }
+
+        &:hover {
+            filter: brightness(.8);
+        }
+    }
+
+    .modal__videoContainer {
+        & > div {
+            width: auto!important;
+            border-radius: inherit;
+            // border: 1px solid red;
+        }
+    }
+
+}
+
+.active {
+    display: block;
+    opacity: 1;
+
+}

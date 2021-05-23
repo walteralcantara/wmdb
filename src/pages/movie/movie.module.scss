@@ -3,10 +3,40 @@
   overflow-y: scroll;
 
   .background {
+    position: relative;
+
     img {
       height: 70vh;
       width: 100%;
       object-fit: cover;
+      cursor: pointer;
+    }
+
+    .playIcon {
+      
+      z-index: 100;
+      position: absolute;
+      top: 25%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      // background: var(--white);
+      
+      transition: .3s;
+
+      svg {
+        width: 70px;
+        border-radius: 50%;
+        background: #fff;
+          & path {
+            fill: var(--tertiary-color);
+          }
+      }
+      
+      &:hover {
+        filter: brightness(.8);
+      }
     }
   }
 
@@ -17,6 +47,7 @@
     display: flex;
 
     .moviePoster {
+      z-index: 100;
       img {
         border-radius: 5px;
         width: 280px;

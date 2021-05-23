@@ -1,22 +1,37 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import { useContext } from 'react';
 
 import { api } from '../../services/api';
 import { formatYear } from '../../utils/formatYear'
+import { formatGenre } from '../../utils/formatGenre';
 import { formatToHoursAndMinutes } from '../../utils/formatToHoursAndMinutes';
 
-import styles from '../movie/movie.module.scss';
-import { formatGenre } from '../../utils/formatGenre';
+import { ContextAPI } from '../../context/ContextAPI';
 import MovieShelf from '../../components/MovieShelf';
+import Modal from '../../components/Modal';
 
-export default function MovieItem({ movieInfo, movieCast, similarMovies }) {
+import styles from '../movie/movie.module.scss';
+
+
+export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVideo }) {
+
+  const { setIsModalOpen } = useContext(ContextAPI);
+
 
   return (
     <div className={styles.moviePageContainer}>
 
+    <Modal element={movieInfo} video={movieVideo} />
 
-      <div className={styles.background}>
+      <div className={styles.background} onClick={() => setIsModalOpen(true)}>
         <img src={movieInfo.backdrop} />
+        <i className={styles.playIcon}>
+          <svg viewBox="0 0 512 512">
+            <path d="M256,0C114.833,0,0,114.844,0,256s114.833,256,256,256s256-114.844,256-256S397.167,0,256,0z M357.771,264.969
+              l-149.333,96c-1.75,1.135-3.771,1.698-5.771,1.698c-1.75,0-3.521-0.438-5.104-1.302C194.125,359.49,192,355.906,192,352V160
+              c0-3.906,2.125-7.49,5.563-9.365c3.375-1.854,7.604-1.74,10.875,0.396l149.333,96c3.042,1.958,4.896,5.344,4.896,8.969
+              S360.813,263.01,357.771,264.969z"/>
+          </svg>
+        </i>
       </div>
 
       <div className={styles.moviePageDetails}>
@@ -95,28 +110,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
 
   const movie = ctx.params;
-  const apiKey = 'd98980b6f729b75d3b64c9e86c4e45fa'
+  
+  const response = await api.get(`movie/${movie.id}`)
+  const responseCredits = await api.get(`movie/${movie.id}/credits`)
+  const responseSimilar = await api.get(`movie/${movie.id}/similar`)
 
-  const response = await api.get(`movie/${movie.id}`, {
-    params: {
-      api_key: apiKey,
-      language: 'pt-BR',
-    }
-  })
-
-  const responseCredits = await api.get(`movie/${movie.id}/credits`, {
-    params: {
-      api_key: apiKey,
-      language: 'pt-BR',
-    }
-  })
-
-  const responseSimilar = await api.get(`movie/${movie.id}/similar`, {
-    params: {
-      api_key: apiKey,
-      language: 'pt-BR',
-    }
-  })
+  const responseVideo = await api.get(`movie/${movie.id}/videos`);
 
   const posterURL = 'https://image.tmdb.org/t/p/w500';
   const backdropURL = 'https://image.tmdb.org/t/p/original'
@@ -142,11 +141,7 @@ export async function getStaticProps(ctx) {
     director: director,
   }
 
-
   const similarMovies = responseSimilar.data.results.map(similarMovie => {
-    const posterURL = 'https://image.tmdb.org/t/p/w500';
-    const backdropURL = 'https://image.tmdb.org/t/p/original'
-
     return {
       id: similarMovie.id,
       poster: posterURL + similarMovie.poster_path,
@@ -157,6 +152,7 @@ export async function getStaticProps(ctx) {
     }
   })
 
+  const movieVideo = responseVideo.data;
   const responseData = response.data;
   const responseSimilarData = responseSimilar.data.results;
 
@@ -166,6 +162,7 @@ export async function getStaticProps(ctx) {
       movieInfo: movieInfo,
       movieCast: movieCast,
       similarMovies: similarMovies,
+      movieVideo: movieVideo,
     },
   };
 }
