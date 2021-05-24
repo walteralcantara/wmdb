@@ -1,7 +1,6 @@
 .modalContainer {
     display: none;
     opacity: 0;
-    transition: .3s ease;
 
     border-radius: 5px;
     background: var(--primary-color);
@@ -9,15 +8,14 @@
     position: absolute;
     z-index: 999;
 
-
     top: 6rem;
     left: 0;
     right: 0;
     margin-left: auto; 
     margin-right: auto;
 
-    height: 80vh;
-    width: 70%;
+    height: auto;
+    width: 90%;
 
     .modal__header {
         border-radius: inherit;
@@ -64,15 +62,26 @@
     .modal__videoContainer {
         & > div {
             width: auto!important;
-            border-radius: inherit;
-            // border: 1px solid red;
+            height: 70vh!important;
         }
     }
 
 }
 
+.modalOverlay {
+    opacity: 0;
+    display: none;
+
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    background: rgba(0,0,0,.85);
+    position: absolute;
+}
+
 .active {
     display: block;
     opacity: 1;
-
 }
+
+

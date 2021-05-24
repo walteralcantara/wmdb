@@ -54,9 +54,20 @@
           opacity: 1;
         }
 
-        .image__rating h4 {
-          font-weight: bold;
-          font-size: 2rem;
+        .image__rating {
+
+          svg {
+            width: 25px;
+            & path {
+              fill: #FDD10C;
+            }
+          }
+
+          h4 {
+            font-weight: bold;
+            font-size: 1.5rem;
+
+          }
         }
 
         .button__details {
