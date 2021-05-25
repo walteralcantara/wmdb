@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import Head from 'next/head';
 
 import { api } from '../../services/api';
 import { formatYear } from '../../utils/formatYear'
@@ -14,15 +15,23 @@ import styles from '../movie/movie.module.scss';
 
 export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVideo }) {
 
-  const { setIsModalOpen } = useContext(ContextAPI);
-
+  const { setIsModalOpen, flag, setFlag } = useContext(ContextAPI);
 
   return (
+    <>
+    <Head>
+      <title>{movieInfo.title} - {movieInfo.year}</title>
+    </Head>
+
     <div className={styles.moviePageContainer}>
 
     <Modal element={movieInfo} video={movieVideo} />
 
-      <div className={styles.background} onClick={() => setIsModalOpen(true)}>
+      <div className={styles.background} onClick={() => {
+        setIsModalOpen(true);
+        setFlag(!flag);
+        }}>
+
         <img src={movieInfo.backdrop} />
         <i className={styles.playIcon}>
           <svg viewBox="0 0 512 512">
@@ -96,6 +105,7 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
       </div>
 
     </div >
+    </>
   );
 }
 
@@ -115,7 +125,11 @@ export async function getStaticProps(ctx) {
   const responseCredits = await api.get(`movie/${movie.id}/credits`)
   const responseSimilar = await api.get(`movie/${movie.id}/similar`)
 
-  const responseVideo = await api.get(`movie/${movie.id}/videos`);
+  const responseVideo = await api.get(`movie/${movie.id}/videos`, {
+    params: {
+      language: 'en-US',
+    }
+  });
 
   const posterURL = 'https://image.tmdb.org/t/p/w500';
   const backdropURL = 'https://image.tmdb.org/t/p/original'

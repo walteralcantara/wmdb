@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 
 import { useContext } from 'react';
@@ -11,14 +11,16 @@ import styles from './Modal.module.scss'
 
 export default function Modal(movieInfo, ...rest) {
 
-  const { isModalOpen, setIsModalOpen } = useContext(ContextAPI);
+  const { isModalOpen, setIsModalOpen, hasVideo, setHasVideo, flag  } = useContext(ContextAPI);
 
   const variants = {
     open: {opacity: 1, y: 0},
     closed: {opacity: 0, y: "-25%" },
-
-    
   }
+
+  useEffect(() => {
+    movieInfo.video.results.length !== 0 ? setHasVideo(true) : setHasVideo(false);
+  }, [flag])
 
   return (
     <>
@@ -38,11 +40,14 @@ export default function Modal(movieInfo, ...rest) {
               </svg>
             </i>
         </header>
+
         <main className={styles.modal__videoContainer}>
-            <ReactPlayer 
-                url={`https://www.youtube.com/watch?v=${movieInfo.video.results[0].key}`}
-            />
+          {hasVideo ? (
+            <ReactPlayer url={`https://www.youtube.com/watch?v=${movieInfo.video.results[0]?.key}`} /> 
+          ) : ( 
+            <h1 className={styles.trailerNotAvailable}>Ops, não há trailer disponível para esse filme no momento :(</h1>)}
         </main>
+        
     </motion.div>
     </>
   );

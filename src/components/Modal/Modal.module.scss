@@ -84,4 +84,13 @@
     opacity: 1;
 }
 
+.trailerNotAvailable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--tertiary-color);
+    
+    height: 50vh;
+}
+
 

@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Slider from "react-slick";
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+
+import { ContextAPI } from '../../context/ContextAPI';
 
 import styles from './MovieShelf.module.scss';
 
@@ -15,22 +17,21 @@ export default function MovieShelf(movieShelf) {
     slidesToScroll: 4
   };
 
-  const [isPath, isSetPath] = useState(null);
+  const { setHasVideo, setPath, path, flag, setFlag } = useContext(ContextAPI);
   
   useEffect(() => {
-    isSetPath(window.location.pathname);
-    
-    console.log('isPath:',isPath)
+    let pathURL = document.location.pathname;
+    setPath(pathURL);    
   }, [])
 
   return (
     <div className={styles.innerMovies}>
       
     <Slider {...settings}>
-      {movieShelf.element.map((movie, index) => {
+      {movieShelf.element.map((movie) => {
         return (
-          <Link href={isPath == '/' ? `./movie/${movie.id}` : `./${movie.id}`} key={movie.id}>
-            <div className={styles.card__movie}>
+          <Link href={path == '/' ? `./movie/${movie.id}` : `./${movie.id}`} key={movie.id}>
+            <div className={styles.card__movie} >
 
               <div className={styles.image__movie}>
                 <img className={styles.image__img} src={movie.poster} alt={movie.title} />

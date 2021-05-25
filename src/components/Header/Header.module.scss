@@ -25,15 +25,17 @@
 
   .searchBox {
     position: relative;
+    padding: 0px 30px;
 
-    input {
-      width: 100%;
-      height: 2rem;
-      padding: 1rem;
+    .searchInput {
+      width: 0px;
+      height: 2.5rem;
 
       color: #000;
       border: 0;
-      border-radius: 4px;
+      border-radius: 50px;
+
+      transition: .3s ease;
 
       &::placeholder {
         color: #444;
@@ -43,38 +45,52 @@
       &:focus {
         outline: none;
       }
-
-      // &:before {
-      //   content: '\f002';
-      //   display: block;
-      //   width: 5px;
-      //   height: 5px;
-      //   font-family: 'font awesome';
-      // }
     }
 
-    button {
-      width: 20px;
+    .searchBtn {
+      width: 40px;
+      height: 40px;
+      
       border: 0;
-      background: transparent;
+      border-radius: 50%;
+      background: #222B31;
       position: absolute;
 
-      right: 1rem;
+      right: 20px;
 
       top: 50%;
       transform: translateY(-50%);
 
-      &:hover svg path {
-        fill: #444;
-      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
+      transition: .3s ease;
+
+            
       svg {
+        padding: 10px;
+        width: inherit;
         display: flex;
         & path {
-          fill: #000;
+          transition: .3s ease;
+          fill: var(--tertiary-color);
         }
       }
     }
+
+    &:hover > .searchInput {
+      width: 350px;
+      padding: 1rem;
+    }
+
+    &:hover > .searchBtn {
+
+      svg path {
+        fill: var(--white);
+      }
+    }
+
   }
 
   #current_date {

@@ -1,6 +1,9 @@
 import Link from "next/link";
+import Head from "next/head";
+
 import { useContext, useState } from "react";
 import Slider from "react-slick";
+
 
 import { ContextAPI } from "../context/ContextAPI";
 
@@ -31,7 +34,11 @@ export default function Home({
   };
 
   return (
-
+    <>
+    <Head>
+      <title>WMDB</title>
+    </Head>
+    
     <div className={styles.homePage}>
       {isSearched && searchedMoviesList ? (
         <section className={styles.searchedMoviesList}>
@@ -114,6 +121,7 @@ export default function Home({
         </>
       )}
     </div>
+    </>
   );
 }
 
