@@ -29,6 +29,12 @@ export default function AsideMenu() {
     setIsOpenMenu(!isOpenMenu);
   }
 
+  function handleGenre(genre, index){
+    console.log(genre)
+    console.log(index)
+
+  }
+
   return (
     <>
       <div className={isOpenMenu ? `${styles.hamburguerMenu} ${styles.active}` : styles.hamburguerMenu} onClick={handleMenu}>
@@ -40,10 +46,12 @@ export default function AsideMenu() {
       </div>
       <aside className={isOpenMenu ? `${styles.asideContainer} ${styles.active}` : styles.asideContainer}>
         <ul>
-          {fetchGenre?.data.genres.map((genre) => {
+          {fetchGenre?.data.genres.map((genre, index) => {
             return (
               <li key={genre.id}>
-                <a href="#">{genre.name}</a>
+                <a href="#" onClick={(genre) => {
+                  console.log(genre)
+                }}>{genre.name}</a>
               </li>
             )
           })}

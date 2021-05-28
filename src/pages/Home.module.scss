@@ -124,7 +124,11 @@
       height: 75vh;
       width: 100%;
       object-fit: cover;
+      object-position: 0px 10%;
       cursor: pointer;
+
+      // max-height: 75vh;
+
     }
     .caption {
       position: fixed;
