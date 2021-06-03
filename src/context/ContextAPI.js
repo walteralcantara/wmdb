@@ -15,7 +15,8 @@ export function ContextAPIProvider(props) {
   const [searchedMoviesList, setSearchedMovieList] = useState([]);
   const [hasVideo, setHasVideo] = useState(null);
   const [path, setPath] = useState('null');
-  const [flag, setFlag] = useState(false)
+  const [flag, setFlag] = useState(false);
+  const [movieGenreList, setMovieGenreList] = useState ([]);
 
   const handleSearch = async () => {
     if (searchText !== '') {      
@@ -58,6 +59,8 @@ export function ContextAPIProvider(props) {
       setPath,
       flag,
       setFlag,
+      movieGenreList,
+      setMovieGenreList,
     }}>
 
     {props.children}

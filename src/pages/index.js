@@ -23,8 +23,6 @@ export default function Home({
 }) {
   const { searchedMoviesList, isSearched } = useContext(ContextAPI);
 
-  console.log(searchedMoviesList)
-
   const settingsCarousel = {
     dots: true,
     infinite: true,
