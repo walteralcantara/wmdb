@@ -94,7 +94,7 @@ export default function Home({
                       </div>
                     </Link>
                     <div className={styles.caption}>
-                      <h3>{slideMovie.title}</h3>
+                      <h2>{slideMovie.title}</h2>
                       <p>{slideMovie.description}</p>
                     </div>
                   </>

@@ -3,7 +3,7 @@
   z-index: 999;
   cursor: pointer;
   left: 1rem;
-  top: 4rem;
+
 
   background: var(--tertiary-color);
   width: 40px;
@@ -13,6 +13,8 @@
   box-shadow: 0 8px 28px 0 rgba(0, 0, 0, 0.8);
 
   transition: filter ease-in-out 0.3s;
+
+  
 
   &:hover {
     filter: brightness(0.7);
@@ -56,11 +58,11 @@
 
 .asideContainer {
   background: var(--secondary-color);
-  height: calc(100vh - 3rem);
+  height: calc(100vh);
   width: 15rem;
-  padding: 1rem 0 0;
+  // padding: 1rem 0 0;
 
-  transform: translateX(-250px);
+  transform: translateX(-350px);
 
   position: absolute;
   z-index: 800;
@@ -68,9 +70,12 @@
   overflow-y: scroll;
   transition: transform 0.3s;
 
+  top: 0;
+  left: 0;
+
   ul {
     list-style-type: none;
-    margin-top: 50px;
+    // margin-top: 50px;
 
     li {
       a {

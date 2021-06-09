@@ -12,10 +12,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
     <ContextAPIProvider>
-      <Header />
       <div className={styles.wrapper}>
         <main>
-          <AsideMenu />
+          <Header />
           <Component {...pageProps} />
         </main>
       </div>
