@@ -1,0 +1,50 @@
+.carousel {
+    position: relative;
+
+    img {
+      height: 75vh;
+      width: 100%;
+      object-fit: cover;
+      object-position: 0px 10%;
+      cursor: grab;
+    }
+
+    .caption {
+      position: absolute;
+      // margin: -8rem 0rem 0rem 2rem;
+      top: 18rem;
+      margin-left: 20px;
+      max-width: 600px;
+      max-height: 100px;
+
+      z-index: 1;
+      // background: rgba(0, 0, 0, 0.6);
+      padding: 5px;
+      border-radius: 3px;
+      // border: 1px solid red;
+
+      p {
+        margin-top: 20px;
+        white-space: pre-line;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    button[class^='slick-arrow slick-prev'],
+    button[class^='slick-arrow slick-next'] {
+      display: none!important;
+      opacity: 0;
+      &:before {
+        display: none;
+        opacity: 0;
+      }
+    }
+  }
+
+.meta {
+  
+  span {
+    margin-left: 5px;
+  }
+}
