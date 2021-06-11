@@ -1,22 +1,23 @@
-.homePage {
 
-  .moviesList {
-    padding: 1rem 2rem;
-    list-style-type: none;
+.moviesList {
+  padding: 1rem 2rem;
+  max-width: 1366px;
+  margin: 0 auto;
+  // list-style-type: none;
 
-    h2 {
-      font-weight: bold;
-      margin-top: 35px;
+  h2 {
+    font-weight: bold;
+    margin-top: 35px;
 
-      &:after {
-        content: '';
-        display: block;
-        background: var(--white);
-        
-        height: 1px;
-        width: 15%;
-        margin: 5px 0;
-      }
+    &:after {
+      content: '';
+      display: block;
+      background: var(--white);
+      
+      height: 1px;
+      width: 10rem;
+      margin: 5px 0px;
     }
   }
 }
+

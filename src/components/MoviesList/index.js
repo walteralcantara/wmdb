@@ -10,8 +10,12 @@ import { motion } from "framer-motion";
 import styles from "./MoviesList.module.scss";
 
 export default function MoviesList(searchedMoviesList) {
+
+  const { isSearched } = useContext(ContextAPI)
+
+
   return (
-    <section className={styles.MoviesList}>
+    <section className={styles.MoviesList} style={isSearched ? {padding: '6rem 0rem'} : {}}>
       {searchedMoviesList.el.map((movie, index) => {
         return (
           <Link href={`./movie/${movie.id}`}>

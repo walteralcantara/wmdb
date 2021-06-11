@@ -1,15 +1,22 @@
 .MoviesList {
     padding: 1rem 0rem;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
     
     .card__movie {
       width: 180px;
       cursor: pointer;
+      
+      &:first-child {
+        margin-right: 2rem;
+      }
 
       & + .card__movie {
         margin-right: 2rem;
+        margin-bottom: 1rem;
       }
 
       .image__movie {

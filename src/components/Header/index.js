@@ -12,7 +12,7 @@ import AsideMenu from '../AsideMenu';
 
 export default function Header({ list }) {
 
-  const {searchText, setSearchText, handleSearch, setIsSearched} = useContext(ContextAPI)
+  const {searchText, setSearchText, handleSearch, isSearched, setIsSearched} = useContext(ContextAPI)
 
 
   const currentDate = format(new Date(), 'EEEEEE, dd MMMM', {
@@ -20,8 +20,7 @@ export default function Header({ list }) {
   }).toString()
 
   return (
-    <header className={styles.headerContainer}>
-      
+    <header className={styles.headerContainer} >
       <AsideMenu />
 
       <div className={styles.logo} onClick={() => setIsSearched(false)}>
@@ -39,11 +38,7 @@ export default function Header({ list }) {
         </button>
       </div>
 
-      
-
-
       <span id={styles.current_date}>{currentDate}</span>
-
     </header>
   );
 }
