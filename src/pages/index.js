@@ -16,9 +16,7 @@ import Carousel from "../components/Carousel";
 import MoviesList from "../components/MoviesList";
 
 export default function Home({ slideMoviesList, trendingMoviesList }) {
-  const { searchedMoviesList, isSearched } = useContext(ContextAPI);
-
-  console.log(slideMoviesList);
+  const { searchedMoviesList, isSearched, searchText } = useContext(ContextAPI);
 
   return (
     <>
@@ -27,14 +25,22 @@ export default function Home({ slideMoviesList, trendingMoviesList }) {
       </Head>
 
       {isSearched && searchedMoviesList ? (
-          <MoviesList el={searchedMoviesList} />
+        <>
+          <section className={styles.homeContainer}>
+            <MoviesList
+                title={`Resultados para: ${searchText}`}
+                movieList={searchedMoviesList}
+              />
+          </section>
+        </>
       ) : (
         <>
           <Carousel el={slideMoviesList} />
 
-          <section className={styles.moviesList}>
-            <h2>Recomendados</h2>
-            <MoviesList el={trendingMoviesList} />
+          <section className={styles.homeContainer}>
+            <MoviesList title="Recomendados" 
+            movieList={trendingMoviesList} 
+          />
           </section>
         </>
       )}
@@ -77,7 +83,7 @@ export const getServerSideProps = async () => {
       title: movie.title,
       poster: `${posterURL}${movie.poster_path}`,
       backdrop: `${backdropURL}${movie.backdrop_path}`,
-      rating: movie.vote_average,
+      rating: movie.vote_average != 0 ? movie.vote_average : '?',
       year: formatYear(movie.release_date),
       genres: formatGenre(movie.genre_ids),
       description: movie.overview,

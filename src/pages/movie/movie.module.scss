@@ -22,19 +22,30 @@
       // background: var(--white);
       
       transition: .3s;
+      
 
       svg {
-        width: 70px;
-        border-radius: 50%;
-        background: #fff;
+        width: 75px;
+        padding: 15px;
+        // border: 1px solid red;
+        border-radius: 38%;
+        background: rgba(255, 255, 255, 0.3);
+
+        transition: .3s ease;
+        
           & path {
-            fill: var(--tertiary-color);
+            fill: #fff;
           }
+
+          
+      }
+      &:hover {
+        svg {
+          background: var(--tertiary-color);
+        }
       }
       
-      &:hover {
-        filter: brightness(.8);
-      }
+      
     }
   }
 

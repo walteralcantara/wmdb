@@ -33,7 +33,6 @@ export default function AsideMenu() {
   
     let pathURL = document.location.pathname;
     setPath(pathURL);    
-    console.log('path:',path);
 
   }, [path])
 
@@ -42,7 +41,6 @@ export default function AsideMenu() {
   }
 
   async function handleGenre(genre_id) {
-    console.log('id:',genre_id);
     // const fetchGenresByMovie = await api.get(`/discover/movie`, {
     //   params: {
     //     with_genres: `${genre_id}`,

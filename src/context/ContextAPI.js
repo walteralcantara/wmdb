@@ -37,7 +37,6 @@ export function ContextAPIProvider(props) {
           description: movie.overview,
         }
       }))
-
       setIsSearched(true);
     }
   }
