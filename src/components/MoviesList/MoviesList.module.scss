@@ -1,17 +1,21 @@
-
 .title {
   font-weight: bold;
   margin-top: 35px;
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     background: var(--white);
-    
+
     height: 1px;
     width: 10rem;
     margin: 5px 0px;
   }
+}
+.container {
+  padding: 1rem 2rem;
+  max-width: 1366px;
+  margin: 0 auto;
 }
 
 .MoviesList {
@@ -21,11 +25,10 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  
   .card__movie {
     width: 180px;
     cursor: pointer;
-    
+
     &:first-child {
       margin-right: 2rem;
     }
@@ -76,18 +79,16 @@
         }
 
         .image__rating {
-
           svg {
             width: 25px;
             & path {
-              fill: #FDD10C;
+              fill: #fdd10c;
             }
           }
 
           h4 {
             font-weight: bold;
             font-size: 1.5rem;
-
           }
         }
 
@@ -134,5 +135,4 @@
       text-overflow: ellipsis;
     }
   }
-
 }

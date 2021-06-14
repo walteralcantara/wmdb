@@ -18,6 +18,8 @@ import MoviesList from "../components/MoviesList";
 export default function Home({ slideMoviesList, trendingMoviesList }) {
   const { searchedMoviesList, isSearched, searchText } = useContext(ContextAPI);
 
+  console.log('searched:', searchedMoviesList)
+
   return (
     <>
       <Head>
@@ -26,22 +28,16 @@ export default function Home({ slideMoviesList, trendingMoviesList }) {
 
       {isSearched && searchedMoviesList ? (
         <>
-          <section className={styles.homeContainer}>
-            <MoviesList
-                title={`Resultados para: ${searchText}`}
-                movieList={searchedMoviesList}
-              />
-          </section>
+          <MoviesList
+            title={`Resultados para: ${searchText}`}
+            movieList={searchedMoviesList}
+          />
         </>
       ) : (
         <>
           <Carousel el={slideMoviesList} />
 
-          <section className={styles.homeContainer}>
-            <MoviesList title="Recomendados" 
-            movieList={trendingMoviesList} 
-          />
-          </section>
+          <MoviesList title="Recomendados" movieList={trendingMoviesList} />
         </>
       )}
     </>
@@ -49,7 +45,6 @@ export default function Home({ slideMoviesList, trendingMoviesList }) {
 }
 
 export const getServerSideProps = async () => {
-
   const posterURL = "https://image.tmdb.org/t/p/w200";
   const backdropURL = "https://image.tmdb.org/t/p/original";
 
@@ -63,19 +58,19 @@ export const getServerSideProps = async () => {
   });
 
   const slideMoviesList = trending.data.results
-  .map((movie) => {
-    return {
-      id: movie.id,
-      title: movie.title,
-      poster: `${posterURL}${movie.poster_path}`,
-      backdrop: `${backdropURL}${movie.backdrop_path}`,
-      rating: movie.vote_average,
-      year: formatYear(movie.release_date),
-      genres: formatGenre(movie.genre_ids),
-      description: movie.overview,
-    };
-  })
-  .slice(0, 8);
+    .map((movie) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        poster: `${posterURL}${movie.poster_path}`,
+        backdrop: `${backdropURL}${movie.backdrop_path}`,
+        rating: movie.vote_average,
+        year: formatYear(movie.release_date),
+        genres: formatGenre(movie.genre_ids),
+        description: movie.overview,
+      };
+    })
+    .slice(0, 8);
 
   const trendingMoviesList = trending.data.results.map((movie) => {
     return {
@@ -83,13 +78,13 @@ export const getServerSideProps = async () => {
       title: movie.title,
       poster: `${posterURL}${movie.poster_path}`,
       backdrop: `${backdropURL}${movie.backdrop_path}`,
-      rating: movie.vote_average != 0 ? movie.vote_average : '?',
+      rating: movie.vote_average != 0 ? movie.vote_average : "?",
       year: formatYear(movie.release_date),
       genres: formatGenre(movie.genre_ids),
       description: movie.overview,
     };
   });
-  
+
   return {
     props: {
       trendingMoviesList,
