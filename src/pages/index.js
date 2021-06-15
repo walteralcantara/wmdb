@@ -15,10 +15,10 @@ import MovieShelf from "../components/MovieShelf";
 import Carousel from "../components/Carousel";
 import MoviesList from "../components/MoviesList";
 
-export default function Home({ slideMoviesList, trendingMoviesList }) {
+export default function Home({ slideMoviesList, trendingMoviesList, responseTeste }) {
   const { searchedMoviesList, isSearched, searchText } = useContext(ContextAPI);
 
-  console.log('searched:', searchedMoviesList)
+  console.log('responseTeste:', responseTeste)
 
   return (
     <>
@@ -36,8 +36,10 @@ export default function Home({ slideMoviesList, trendingMoviesList }) {
       ) : (
         <>
           <Carousel el={slideMoviesList} />
-
-          <MoviesList title="Recomendados" movieList={trendingMoviesList} />
+          <MoviesList 
+            title="Em alta hoje" 
+            movieList={trendingMoviesList} 
+          />
         </>
       )}
     </>
@@ -49,13 +51,13 @@ export const getServerSideProps = async () => {
   const backdropURL = "https://image.tmdb.org/t/p/original";
 
   const trending = await api.get("trending/movie/day");
-  const popular = await api.get("movie/popular");
-  const toprated = await api.get("movie/top_rated");
-  const nowplaying = await api.get("/movie/now_playing", {
+  
+  const trendingTest = await api.get("trending/movie/day", {
     params: {
-      region: "BR",
-    },
+      page: 2,
+    }
   });
+
 
   const slideMoviesList = trending.data.results
     .map((movie) => {
@@ -89,6 +91,7 @@ export const getServerSideProps = async () => {
     props: {
       trendingMoviesList,
       slideMoviesList,
+      responseTeste: trendingTest.data,
     },
     // revalidate: 60 * 60 * 8, // 8 hours
   };

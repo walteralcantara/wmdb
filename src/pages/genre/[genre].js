@@ -9,8 +9,6 @@ export default function Genre({ genre }) {
 
   const { movieGenreList } = useContext(ContextAPI);
 
-  console.log('[genre]:', movieGenreList);
-
   return (
     <>
       <Head>

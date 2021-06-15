@@ -2,6 +2,7 @@
   
   .background {
     position: relative;
+    z-index: -1;
 
     img {
       height: 70vh;
@@ -56,7 +57,7 @@
     display: flex;
 
     .moviePoster {
-      z-index: 100;
+      
       img {
         border-radius: 5px;
         width: 280px;
@@ -122,11 +123,11 @@
 
         .gridCast {
           display: grid;
-        grid-template-columns: repeat(6,1fr);
-        gap: 5px;
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
+          grid-template-columns: repeat(6,1fr);
+          gap: 5px;
+          justify-content: center;
+          text-align: center;
+          flex-wrap: wrap;
 
         }
 

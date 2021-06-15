@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 
 import { api } from '../../services/api';
@@ -13,9 +13,11 @@ import Modal from '../../components/Modal';
 import styles from '../movie/movie.module.scss';
 
 
-export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVideo }) {
+export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVideo, responseTeste }) {
 
   const { setIsModalOpen, flag, setFlag } = useContext(ContextAPI);
+
+  console.log('responseTeste >>', responseTeste);
 
   return (
     <>
@@ -86,7 +88,7 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
                   return (
                     <div>
                       <img
-                        src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+                        src={actor.profile_path != null ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : '../no-avatar.png' }
                       />
                       <strong>{actor.name}</strong>
                       <span>{actor.character}</span>
@@ -96,7 +98,7 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
                 <div>
                   {
                     <img
-                      src={`https://image.tmdb.org/t/p/w500/${movieCast.director.profile_path}`}
+                      src={movieCast.director.profile_path != null ? `https://image.tmdb.org/t/p/w500/${movieCast.director.profile_path}` : '../no-avatar.png' }
                     />
                   }
                   <strong>{movieCast.director.name}</strong>
@@ -132,9 +134,19 @@ export async function getStaticProps(ctx) {
   const responseCredits = await api.get(`movie/${movie.id}/credits`)
   const responseSimilar = await api.get(`movie/${movie.id}/similar`)
 
-  const responseVideo = await api.get(`movie/${movie.id}/videos`, {
+
+  //TESTE
+  const responseTeste = await api.get(`movie/${movie.id}/reviews`, {
     params: {
       language: 'en-US',
+    }
+  })
+  //TESTE
+
+  
+  const responseVideo = await api.get(`movie/${movie.id}/videos`, {
+    params: {
+      language: 'pt-BR',
     }
   });
 
@@ -184,6 +196,7 @@ export async function getStaticProps(ctx) {
       movieCast: movieCast,
       similarMovies: similarMovies,
       movieVideo: movieVideo,
+      responseTeste: responseTeste.data,
     },
   };
 }
