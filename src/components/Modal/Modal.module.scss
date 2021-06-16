@@ -38,8 +38,8 @@
         
         background: var(--tertiary-color);
         
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
         
         display: flex;
@@ -55,7 +55,13 @@
         }
 
         &:hover {
-            filter: brightness(.8);
+            background: #fff;
+            transition: ease .3s;
+            svg {
+                & polygon {
+                    fill: var(--tertiary-color);
+                }
+            }
         }
     }
 
@@ -76,7 +82,7 @@
     width: 100%;
     z-index: 999;
     background: rgba(0,0,0,.85);
-    position: absolute;
+    position: fixed;
 }
 
 .active {

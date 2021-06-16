@@ -27,7 +27,7 @@ export default function MoviesList({ title, movieList }) {
                   <div className={styles.image__movie}>
                     <img
                       className={styles.image__img}
-                      src={movie.poster != 'https://image.tmdb.org/t/p/w200null' ? movie.poster : 'no-photo.png'}
+                      src={movie.poster !== 'https://image.tmdb.org/t/p/w200null' ? movie.poster : '../no-photo.png' }
                       alt={movie.title}
                     />
 

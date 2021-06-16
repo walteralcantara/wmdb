@@ -8,6 +8,7 @@ import { formatToHoursAndMinutes } from '../../utils/formatToHoursAndMinutes';
 
 import { ContextAPI } from '../../context/ContextAPI';
 import MovieShelf from '../../components/MovieShelf';
+import MoviesList from '../../components/MoviesList';
 import Modal from '../../components/Modal';
 
 import styles from '../movie/movie.module.scss';
@@ -17,7 +18,7 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
 
   const { setIsModalOpen, flag, setFlag } = useContext(ContextAPI);
 
-  console.log('responseTeste >>', responseTeste);
+  console.log('responseTeste >>', similarMovies);
 
   return (
     <>
@@ -110,8 +111,17 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
         </div>
 
         <div className={styles.similarMovies}>
-          <h2>Filmes similares</h2>
-          <MovieShelf element={similarMovies} />
+          {similarMovies.length <= 4 ? (
+            <MoviesList 
+              title="Filmes similares" 
+              movieList={similarMovies}
+            />
+          ) : (
+            <>
+            <h2>Filmes similares</h2>
+            <MovieShelf element={similarMovies} />
+            </>
+          )}
         </div>
       </div>
     </>
@@ -150,7 +160,7 @@ export async function getStaticProps(ctx) {
     }
   });
 
-  const posterURL = 'https://image.tmdb.org/t/p/w500';
+  const posterURL = 'https://image.tmdb.org/t/p/w200';
   const backdropURL = 'https://image.tmdb.org/t/p/original'
 
   const movieInfo = {
