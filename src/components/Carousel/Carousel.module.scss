@@ -43,21 +43,61 @@
               max-width: 600px;
               z-index: 10;
 
+              @media only screen and (max-width: 600px) {
+                width: auto;
+              }
+
               .title {
                 font-size: 2.5rem;
+               
+                @media only screen and (max-width: 600px) {
+                  font-size: 1.5rem;
+                  width: 100%;
+                  max-width: 70%;
+                  text-align: left;
+                }
               }
         
               .meta {
                 margin-top: .5rem;
                 font-weight: normal;
 
-                span {
-                  font-weight: 100;
+                @media only screen and (max-width: 600px) {
+                  max-width: 65%;
                 }
+
+                ul {
+                  list-style-type: none;
+                  display: flex;
+                  
+                  @media only screen and (max-width: 600px) {
+                    flex-wrap: wrap;
+                    align-items: center;
+                    text-align: center;
+
+                    li {
+                      margin-right: 15px;
+                    }
+                  }
+
+                  li:first-child {
+                    display: flex;
+                  }
   
-                span + span {
-                  margin-left: 15px;
+                  li {
+                    font-weight: 100;
+                  }
+  
+                  li + li {
+                    margin-left: 15px;
+                    @media only screen and (max-width: 600px) {
+                      margin-left: unset;
+                    }
+                  }
+
                 }
+
+                
 
                 svg {
                   width: 12px;
@@ -76,7 +116,12 @@
                   -webkit-box-orient: vertical;
                   overflow: hidden;
                   text-overflow: ellipsis;
+                  @media only screen and (max-width: 600px) {
+                    display: none;
+                  }
                 }
+
+                
               }
 
               p {
@@ -114,6 +159,10 @@
               object-fit: cover;
               object-position: 0px 10%;
               position: relative;
+
+              @media only screen and (max-width: 600px) {
+                object-position: unset;
+              }
             }
           }
         }
@@ -130,4 +179,8 @@
       }
     }
   }
+
+// responsiveness 
+
+
 

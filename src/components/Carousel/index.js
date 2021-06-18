@@ -9,7 +9,7 @@ const settingsCarousel = {
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: true,
+  autoplay: false,
 };
 
 export default function Carousel(slideMoviesList) {
@@ -25,7 +25,8 @@ export default function Carousel(slideMoviesList) {
                 <h2 className={styles.title}>{slideMovie.title}</h2>
 
                 <div className={styles.meta}>
-                  <span>
+                  <ul>
+                  <li>
                     <i>
                       <svg viewBox="0 0 512.002 512.002">
                         <path
@@ -39,11 +40,12 @@ export default function Carousel(slideMoviesList) {
                       </svg>
                     </i>
                     {slideMovie.rating}
-                  </span>
+                  </li>
                   {slideMovie.genres.map((genre) => (
-                    <span>{genre}</span>
+                    <li>{genre}</li>
                   ))}
-                  <span>{slideMovie.year}</span>
+                  <li>{slideMovie.year}</li>
+                  </ul>
                   <p>{slideMovie.description}</p>
                 </div>
                 <Link href={`/movie/${slideMovie.id}`} key={slideMovie.id}>
