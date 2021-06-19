@@ -16,6 +16,10 @@
   padding: 1rem 2rem;
   max-width: 1366px;
   margin: 0 auto;
+
+  @media only screen and (max-width: 600px) {
+    padding: 1rem 1rem;
+  }
 }
 
 .MoviesList {
@@ -26,22 +30,46 @@
   justify-content: center;
   max-width: 1280px;
 
+  @media only screen and (max-width: 600px) {
+    // border: 1px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    padding: 1rem;
+  }
+
   .card__movie {
     width: 180px;
     cursor: pointer;
 
+    @media only screen and (max-width: 600px) {
+      // border: 1px solid blue;
+      width: 150px;
+    }
+
     &:first-child {
       margin-right: 2rem;
+      
+      @media only screen and (max-width: 600px) {
+        margin-right: unset;
+      }
     }
 
     & + .card__movie {
       margin-right: 2rem;
       margin-bottom: 1rem;
+      @media only screen and (max-width: 600px) {
+        margin-right: unset;
+      }
     }
 
     .image__movie {
       position: relative;
       width: 180px;
+
+      @media only screen and (max-width: 600px) {
+        width: inherit;
+      }
 
       .image__img {
         border-radius: 5px;
