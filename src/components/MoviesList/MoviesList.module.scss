@@ -18,7 +18,7 @@
   margin: 0 auto;
 
   @media only screen and (max-width: 600px) {
-    padding: 1rem 1rem;
+    padding: 1rem .5rem;
   }
 }
 
@@ -31,20 +31,31 @@
   max-width: 1280px;
 
   @media only screen and (max-width: 600px) {
-    // border: 1px solid red;
+    
     display: grid;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
-    padding: 1rem;
+    padding: .5rem;
   }
 
   .card__movie {
     width: 180px;
     cursor: pointer;
 
-    @media only screen and (max-width: 600px) {
-      // border: 1px solid blue;
-      width: 150px;
+    
+
+    @media only screen and (max-width: 600px) {      
+      width: 100%;
+      max-width: 180px;
+      justify-self: center;
+    }
+
+    @media only screen and (max-width: 325px) {
+      width: 100%;
+      max-width: 150px;
+      justify-self: center;
     }
 
     &:first-child {
