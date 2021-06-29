@@ -18,8 +18,6 @@ export default function MovieItem({ movieInfo, movieCast, similarMovies, movieVi
 
   const { setIsModalOpen, flag, setFlag } = useContext(ContextAPI);
 
-  console.log('responseTeste >>', similarMovies);
-
   return (
     <>
       <Head>

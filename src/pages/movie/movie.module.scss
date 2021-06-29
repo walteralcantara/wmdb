@@ -56,6 +56,10 @@
 
     display: flex;
 
+    @media only screen and (max-width: 600px) {      
+      flex-direction: column;
+    }
+
     .moviePoster {
       z-index: 1;
       
@@ -70,6 +74,13 @@
       margin-top: 6rem;
 
       padding: 0rem 1rem;
+
+      @media only screen and (max-width: 600px) {      
+        margin-top: 1rem;
+        padding: unset;
+        max-width: unset;
+      }
+      
 
       h2 {
       }
@@ -122,6 +133,10 @@
         
         margin-top: 20px;
 
+        @media only screen and (max-width: 600px) {      
+          flex-direction: column;
+        }
+
         .gridCast {
           display: grid;
           grid-template-columns: repeat(6,1fr);
@@ -129,6 +144,10 @@
           justify-content: center;
           text-align: center;
           flex-wrap: wrap;
+
+          @media only screen and (max-width: 600px) {      
+            grid-template-columns: repeat(2, 1fr);
+          }
 
         }
 

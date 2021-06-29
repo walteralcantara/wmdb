@@ -22,7 +22,7 @@ export default function MoviesList({ title, movieList }) {
         <section className={styles.MoviesList}>
           {movieList?.map((movie, index) => {
             return (
-              <Link href={`./movie/${movie.id}`} key={movie.id}>
+              <Link href={`/movie/${movie.id}`} key={movie.id}>
                 <div  className={styles.card__movie}>
                   <div className={styles.image__movie}>
                     <img

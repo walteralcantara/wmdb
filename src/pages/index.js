@@ -18,8 +18,6 @@ import MoviesList from "../components/MoviesList";
 export default function Home({ slideMoviesList, trendingMoviesList, responseTeste }) {
   const { searchedMoviesList, isSearched, searchText } = useContext(ContextAPI);
 
-  console.log('responseTeste:', responseTeste)
-
   return (
     <>
       <Head>
@@ -29,7 +27,7 @@ export default function Home({ slideMoviesList, trendingMoviesList, responseTest
       {isSearched && searchedMoviesList ? (
         <>
           <MoviesList
-            title={`Resultados para: ${searchText}`}
+            title={'Resultados'}
             movieList={searchedMoviesList}
           />
         </>

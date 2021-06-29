@@ -12,11 +12,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  
+  @media only screen and (max-width: 600px) {      
+    padding: 2rem 1rem;
+  }
   .logo {
     text-align: center;
     padding: 10px;
     cursor: pointer;
+    
+    @media only screen and (max-width: 600px) {      
+      margin-left: 2rem;
+    }
 
     svg {
       width: 110px;
@@ -32,6 +39,11 @@
     position: relative;
     padding: 0px 30px;
 
+    @media only screen and (max-width: 600px) {      
+      position: unset;
+      padding:unset;
+    }
+
     .searchInput {
       width: 0px;
       height: 2.5rem;
@@ -43,9 +55,18 @@
 
       transition: .3s ease;
 
+      @media only screen and (max-width: 600px) {      
+        background: rgba(255,255,255,.8);
+        color: #000;
+      }
+
+
       &::placeholder {
         color: #fff;
         opacity: 0.8;
+        @media only screen and (max-width: 600px) {   
+          color: #000;
+        }
       }
 
       &:focus {
@@ -73,7 +94,6 @@
 
       transition: .3s ease;
 
-            
       svg {
         padding: 10px;
         width: inherit;
@@ -88,10 +108,18 @@
     &:hover > .searchInput {
       width: 350px;
       padding: 1rem;
+      @media only screen and (max-width: 600px) {      
+        position: absolute;
+        width: 95%;
+        top: 4rem;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     &:hover > .searchBtn {
-
       background: var(--white);
       svg path {
         fill: var(--tertiary-color);
@@ -102,5 +130,8 @@
 
   #current_date {
     text-transform: capitalize;
+    @media only screen and (max-width: 600px) {      
+      display: none;
+    }
   }
 }

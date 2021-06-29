@@ -38,6 +38,8 @@ export function ContextAPIProvider(props) {
         }
       }))
       setIsSearched(true);
+      setSearchText('');
+      console.log('searchText', searchText);
     }
   }
  
