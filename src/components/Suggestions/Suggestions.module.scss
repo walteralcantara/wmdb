@@ -1,0 +1,43 @@
+.suggestions {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  
+  background: #222B31;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: .5rem;
+
+  width: 350px;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  @media only screen and (max-width: 600px) { 
+    width: 90%;
+  }
+}
+
+.suggestion {
+  color: #fff;
+  text-decoration: none;
+
+  display: flex;
+
+  div[class^="poster"] {
+    width: 100px;
+    margin: .25rem 0;
+  }
+
+  div[class^="info"] {
+    margin: 0 .25rem;
+  }
+
+  div[class^="meta"] {
+    span + span {
+      margin: 0 .5rem;
+    }
+  }
+}
+
+
+

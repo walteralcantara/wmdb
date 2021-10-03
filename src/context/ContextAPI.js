@@ -1,9 +1,9 @@
-import {createContext, useState, ReactNode, useContext} from 'react';
+import {createContext, useState, useEffect} from 'react';
+
 import { api } from '../services/api';
+
 import { formatGenre } from '../utils/formatGenre';
 import { formatYear } from '../utils/formatYear';
-
-
 
 export const ContextAPI = createContext();
 
@@ -13,6 +13,7 @@ export function ContextAPIProvider(props) {
   const [isSearched, setIsSearched] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchedMoviesList, setSearchedMovieList] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [hasVideo, setHasVideo] = useState(null);
   const [path, setPath] = useState('null');
   const [flag, setFlag] = useState(false);
@@ -21,8 +22,9 @@ export function ContextAPIProvider(props) {
   const handleSearch = async () => {
     if (searchText !== '') {      
       const response = await api.get(`/search/movie?query=${searchText}`);
-      
-      setSearchedMovieList(response.data.results.map((movie) => {
+      const { results } = response.data;
+
+      setSearchedMovieList(results.map((movie) => {
         const posterURL = "https://image.tmdb.org/t/p/w200";
         const backdropURL = "https://image.tmdb.org/t/p/original";
 
@@ -37,11 +39,22 @@ export function ContextAPIProvider(props) {
           description: movie.overview,
         }
       }))
+
       setIsSearched(true);
       setSearchText('');
-      console.log('searchText', searchText);
     }
   }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      const response = await api.get(`/search/movie?query=${searchText || null}`);
+      const { results } = response.data;
+      const resultsFound = searchText !== '' ? results : [];
+      setSuggestions(resultsFound);
+    }, 1250)
+
+    return () => clearTimeout(delayDebounceFn)
+  },[searchText])
  
   return (
   <ContextAPI.Provider 
@@ -62,6 +75,7 @@ export function ContextAPIProvider(props) {
       setFlag,
       movieGenreList,
       setMovieGenreList,
+      suggestions,
     }}>
 
     {props.children}
