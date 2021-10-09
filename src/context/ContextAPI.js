@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect} from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 import { api } from '../services/api';
 
@@ -18,6 +18,7 @@ export function ContextAPIProvider(props) {
   const [path, setPath] = useState('null');
   const [flag, setFlag] = useState(false);
   const [movieGenreList, setMovieGenreList] = useState ([]);
+  const [currentPage, setCurrentPage] = useState(2);
 
   const handleSearch = async () => {
     if (searchText !== '') {      
@@ -76,6 +77,8 @@ export function ContextAPIProvider(props) {
       movieGenreList,
       setMovieGenreList,
       suggestions,
+      currentPage,
+      setCurrentPage
     }}>
 
     {props.children}
