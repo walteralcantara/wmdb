@@ -11,13 +11,16 @@ export default function MoviesList({ title, movieList }) {
 
   return (
     <section className={styles.container}>
-      <h2
-        className={styles.title}
-        style={isSearched ? { padding: "6rem 0 0 0" } : {}}
-      >
-        {title}
-      </h2>
 
+      {title && (
+        <h2
+          className={styles.title}
+          style={isSearched ? { padding: "6rem 0 0 0" } : {}}
+        >
+          {title}
+        </h2>
+      )}
+      
       <section className={styles.MoviesList}>
         {movieList?.map((movie) => {
           return (
@@ -28,6 +31,7 @@ export default function MoviesList({ title, movieList }) {
                     className={styles.image__img}
                     src={movie.poster !== 'https://image.tmdb.org/t/p/w200null' ? movie.poster : '../no-photo.png' }
                     alt={movie.title}
+                    loading="lazy"
                   />
 
                   <figcaption className={styles.image__overlay}>

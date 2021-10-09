@@ -69,6 +69,7 @@ export default function MovieShelf(movieShelf) {
                     className={styles.image__img}
                     src={movie.poster}
                     alt={movie.title}
+                    loading="lazy"
                   />
 
                   <figcaption className={styles.image__overlay}>

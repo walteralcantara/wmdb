@@ -18,8 +18,8 @@ export default function Carousel(slideMoviesList) {
       <Slider {...settingsCarousel}>
         {slideMoviesList.el.map((slideMovie) => {
           return (
-            <div className={styles.carouselItem} key={slideMovie.id}>
-              <img src={slideMovie.backdrop} />
+            <div key={slideMovie.title} className={styles.carouselItem}>
+              <img src={slideMovie.backdrop} loading="lazy" />
 
               <div className={styles.info}>
                 <h2 className={styles.title}>{slideMovie.title}</h2>
