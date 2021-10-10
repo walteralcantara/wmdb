@@ -15,7 +15,7 @@ export function ContextAPIProvider(props) {
   const [searchedMoviesList, setSearchedMovieList] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [hasVideo, setHasVideo] = useState(null);
-  const [path, setPath] = useState('null');
+  const [path, setPath] = useState(null);
   const [flag, setFlag] = useState(false);
   const [movieGenreList, setMovieGenreList] = useState ([]);
   const [currentPage, setCurrentPage] = useState(2);
@@ -56,6 +56,11 @@ export function ContextAPIProvider(props) {
 
     return () => clearTimeout(delayDebounceFn)
   },[searchText])
+
+  useEffect(() => {
+    const pathNow = window.location.pathname;
+    setPath(pathNow);
+  })
  
   return (
   <ContextAPI.Provider 

@@ -75,7 +75,9 @@ export default function AsideMenu() {
                 handleGenre(genre.id)
               }}>
                 <Link 
-                  href={path == '/' ? `./genre/${genre.name}` : `../genre/${genre.name}`}
+                  href={path == '/' 
+                  ? `./genre/${genre.name}`
+                  : `../genre/${genre.name}`}
                   genre={`${genre.name}`}
                 >
                   {genre.name}

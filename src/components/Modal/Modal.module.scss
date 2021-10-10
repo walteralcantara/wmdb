@@ -1,5 +1,4 @@
 .modalContainer {
-    display: none;
     opacity: 0;
 
     border-radius: 5px;
@@ -35,37 +34,24 @@
 
     .modal__close {
         cursor: pointer;
-        
         background: var(--tertiary-color);
-        
         width: 35px;
         height: 35px;
         border-radius: 50%;
-        
         display: flex;
         justify-content: center;
         align-items: center;
 
         @media only screen and (max-width: 600px) {      
-            width: 25px;
-            height: 25px;
-          }
-
-        svg {
-            width: 15px;
-
-            & polygon {
-                fill: var(--white);
-            }
+          width: 25px;
+          height: 25px;
         }
 
         &:hover {
             background: #fff;
             transition: ease .3s;
-            svg {
-                & polygon {
-                    fill: var(--tertiary-color);
-                }
+            svg path {
+              fill: var(--tertiary-color);
             }
         }
     }
@@ -80,28 +66,35 @@
 }
 
 .modalOverlay {
-    opacity: 0;
-    display: none;
-
-    height: 100%;
-    width: 100%;
-    z-index: 999;
-    background: rgba(0,0,0,.85);
-    position: fixed;
-}
-
-.active {
-    display: block;
-    opacity: 1;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  background: rgba(0,0,0,.85);
+  position: fixed;
 }
 
 .trailerNotAvailable {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--tertiary-color);
-    
-    height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--tertiary-color);
+  height: 50vh;
 }
+
+/* animation */
+
+.modalContainer,
+.modalOverlay {
+  transform: translateY(-150%);
+  transition: all .3s;
+}
+
+.active {
+  opacity: 1;
+  transform: translateY(0%);
+}
+
+
 
 

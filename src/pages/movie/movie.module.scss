@@ -1,8 +1,8 @@
-.moviePageContainer {
+.container {
   
-  .background {
+  .cover {
     position: relative;
-    z-index: 0;
+    z-index: 1;
 
     img {
       height: 70vh;
@@ -12,7 +12,6 @@
     }
 
     .playIcon {
-      
       z-index: 100;
       position: absolute;
       top: 25%;
@@ -20,47 +19,29 @@
       display: flex;
       justify-content: center;
       cursor: pointer;
-      // background: var(--white);
-      
       transition: .3s;
       
 
       svg {
         width: 75px;
         padding: 15px;
-        // border: 1px solid red;
         border-radius: 38%;
         background: rgba(255, 255, 255, 0.3);
-
         transition: .3s ease;
         
-          & path {
-            fill: #fff;
-          }
-
-          
+        path { fill: #fff; }
+        &:hover { background: var(--tertiary-color); }
       }
-      &:hover {
-        svg {
-          background: var(--tertiary-color);
-        }
-      }
-      
-      
     }
   }
 
-  .moviePageDetails {
+  .details {
     padding: 1rem 2rem;
     margin-top: -6rem;
-
     display: flex;
 
-    @media only screen and (max-width: 600px) {      
-      flex-direction: column;
-    }
-
-    .moviePoster {
+    .poster {
+      position: relative;
       z-index: 1;
       
       img {
@@ -69,23 +50,12 @@
       }
     }
 
-    .movieSubInfo {
+    .data {
       max-width: 70%;
       margin-top: 6rem;
-
       padding: 0rem 1rem;
-
-      @media only screen and (max-width: 600px) {      
-        margin-top: 1rem;
-        padding: unset;
-        max-width: unset;
-      }
       
-
-      h2 {
-      }
-
-      div {
+      .metadata {
         display: flex;
 
         span {
@@ -105,39 +75,36 @@
         }
       }
 
-      p {
-        margin-top: 15px;
+      .description {
+        margin: 1rem 0 0 0;
       }
 
-      .genresList {
+      .genres {
+        margin: 1rem 0 0 0;
+
         span {
           &:after {
             content: ',';
             display: inline-block;
           }
-
+  
           &:last-child {
             &:after {
               content: '.';
               display: inline-block;
             }
           }
-
+  
           & + span {
             margin-left: 6px;
           }
         }
       }
 
-      .movieSubCast {
-        
-        margin-top: 20px;
+      .cast {
+        margin: 2rem 0 0 0;
 
-        @media only screen and (max-width: 600px) {      
-          flex-direction: column;
-        }
-
-        .gridCast {
+        .crew {
           display: grid;
           grid-template-columns: repeat(6,1fr);
           gap: 5px;
@@ -145,55 +112,83 @@
           text-align: center;
           flex-wrap: wrap;
 
-          @media only screen and (max-width: 600px) {      
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-        }
-
-        strong:first-child {
-          display: block;
-        }
-
-        div {
-          display: block;
-          flex: 1;
-
-          img {
-            min-width: 80px;
-            height: 80px;
-
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto;
-          }
-
-          strong {
-            display: inline-block;
-          }
-
-          span {
-            margin: 0;
+          li {
             display: block;
-            font-weight: normal;
+            flex: 1;
+  
+            img {
+              min-width: 80px;
+              height: 80px;
+              object-fit: cover;
+              border-radius: 50%;
+              margin: 0 auto;
+            }
+  
+            strong {
+              display: inline-block;
+            }
+  
+            span {
+              margin: 0;
+              display: block;
+              font-weight: normal;
+            }
           }
         }
       }
     }
   }
 
-  .similarMovies {
+  .similar {
     padding: 0rem 2rem;
 
-    h2 {
-      &:after {
-        content: '';
-        display: block;
-        width: 100%;
-        background: var(--white);
-        height: 1px;
-        margin: 10px 0;
+    h2:after {
+      content: '';
+      display: block;
+      width: 100%;
+      background: var(--white);
+      height: 1px;
+      margin: 10px 0;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {      
+    .details {
+      flex-direction: column;
+    }
+
+    .details .data {
+      margin-top: 1rem;
+      padding: unset;
+      max-width: unset;
+
+      .cast {
+        flex-direction: column;
+      }
+
+      .cast .crew {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
+
+  }
+}
+
+.back {
+  position: fixed;
+  left: 1rem;
+  top: 4rem;
+  z-index: 3;
+  background: var(--tertiary-color);
+  border: 0;
+  padding: .25rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: all .3s;
+
+  &:hover  {
+    background: #fff;
+    svg path { fill: var(--tertiary-color) }
   }
 }

@@ -42,7 +42,7 @@ export default function Carousel(slideMoviesList) {
                     {slideMovie.rating}
                   </li>
                   {slideMovie.genres.map((genre) => (
-                    <li>{genre}</li>
+                    <li key={genre} >{genre}</li>
                   ))}
                   <li>{slideMovie.year}</li>
                   </ul>

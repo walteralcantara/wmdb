@@ -1,22 +1,15 @@
 import React from "react";
 import Link from "next/link";
 
-import { useContext } from "react";
-import { ContextAPI } from "../../context/ContextAPI";
-
 import styles from "./MoviesList.module.scss";
 
 export default function MoviesList({ title, movieList }) {
-  const { isSearched } = useContext(ContextAPI);
 
   return (
     <section className={styles.container}>
 
       {title && (
-        <h2
-          className={styles.title}
-          style={isSearched ? { padding: "6rem 0 0 0" } : {}}
-        >
+        <h2 className={styles.title}>
           {title}
         </h2>
       )}
@@ -29,7 +22,10 @@ export default function MoviesList({ title, movieList }) {
                 <div className={styles.image__movie}>
                   <img
                     className={styles.image__img}
-                    src={movie.poster !== 'https://image.tmdb.org/t/p/w200null' ? movie.poster : '../no-photo.png' }
+                    src={movie.poster !== 'https://image.tmdb.org/t/p/w200null'
+                      ? movie.poster
+                      : '../no-photo.png'}
+                      
                     alt={movie.title}
                     loading="lazy"
                   />
@@ -48,7 +44,11 @@ export default function MoviesList({ title, movieList }) {
                           />
                         </svg>
                       </i>
-                      <h4>{movie.rating != 0 ? movie.rating : '?' } / 10</h4>
+                      <h4>
+                        {movie.rating != 0
+                        ? movie.rating
+                        : '?'} / 10
+                      </h4>
                     </div>
 
                     <div className={styles.image__genre}>

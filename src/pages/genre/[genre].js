@@ -1,13 +1,23 @@
 
 import Head from 'next/head';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import MoviesList from '../../components/MoviesList';
+
 import { ContextAPI } from '../../context/ContextAPI';
+
+import { hideHeader } from '../../utils/hideHeader';
 
 export default function Genre({ genre }) {
 
-  const { movieGenreList } = useContext(ContextAPI);
+  const { 
+    movieGenreList,
+    path
+  } = useContext(ContextAPI);
+
+  useEffect(() => {
+    hideHeader();
+  }, [path])
 
   return (
     <>
@@ -19,7 +29,6 @@ export default function Genre({ genre }) {
         title={`${genre.genre}`} 
         movieList={movieGenreList} 
       />
-
     </>
   );
 }

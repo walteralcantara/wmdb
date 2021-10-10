@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import format from 'date-fns/format';
 import ptBR from 'date-fns/locale/pt-BR';
+
+import { hideHeader } from '../../utils/hideHeader';
 
 import { ContextAPI } from '../../context/ContextAPI';
 import AsideMenu from '../AsideMenu';
@@ -34,7 +36,6 @@ export default function Header() {
           <h1>WMDB</h1>
         </Link>
       </div>
-
 
       <div className={styles.searchBox}>
         <input 
